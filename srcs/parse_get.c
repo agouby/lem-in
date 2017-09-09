@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 16:25:35 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/07 21:57:15 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/09 15:27:38 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,7 @@ void	get_command(t_parser *pars, char *line)
 
 void	get_room(t_env *lem, t_parser *pars, char *line)
 {
-	size_t	cut;
-
-	cut = pars->slh - line;
-	if (!valid_room_name(line) || !valid_room_coords(line + cut))
+	if (!valid_room_name(line) || !valid_room_coords(pars->slh))
 	{
 		parse_error(pars, &line);
 		return ;
@@ -52,16 +49,13 @@ void	get_room(t_env *lem, t_parser *pars, char *line)
 		pars->got_room = 1;
 	if (pars->got_start || pars->got_end)
 		pars->command_cnt++;
-	create_room(lem, pars, line, cut);
-	pars->got_start = 0;
+	create_room(lem, pars, line);
 	pars->got_end = 0;
+	pars->got_start = 0;
 }
 
 void	get_tube(t_env *lem, t_parser *pars, char *line)
 {
-	size_t	cut;
-
-	cut = pars->slh - line;
 	if (!pars->got_tube)
 		pars->got_tube = 1;
 	if (pars->command_cnt != 2 || *line == '-')
@@ -69,5 +63,15 @@ void	get_tube(t_env *lem, t_parser *pars, char *line)
 		parse_error(pars, &line);
 		return ;
 	}
-	convert_tube(lem, line, cut);
+	convert_tube(lem, pars, line);
+}
+
+void	get_r_coords(t_room *r, char *line)
+{
+	while (*line && ft_isspace(*line))
+		line++;
+	r->x = ft_atoi(line);
+	while (ft_isdigit(*line))
+		line++;
+	r->y = ft_atoi(line);
 }

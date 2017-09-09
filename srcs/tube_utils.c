@@ -6,45 +6,64 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 13:33:58 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/07 21:04:38 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/09 16:04:15 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	push_tube_in_room(t_env *lem, char *cur, char *nei, size_t hash)
+void	push_t_in_r(t_env *lem, char *cur, char *nei, size_t h, size_t h_sec)
 {
 	t_rlist	*tmp;
-	t_list	*tmp_nei;
+	t_rlist	*tmp_nei;
+	t_rlist	*tmp_sec;
 
-	tmp = lem->hash[hash];
+	tmp = lem->hash[h];
+	tmp_sec = lem->hash[h_sec];
 	while (tmp && !ft_strequ(tmp->r.name, cur))
 		tmp = tmp->next;
 	tmp_nei = tmp->r.nei;
 	while (tmp_nei)
 	{
-		if (ft_strequ(tmp_nei->content, nei))
+		if (ft_strequ(tmp_nei->r.name, nei))
 			return ;
 		tmp_nei = tmp_nei->next;
 	}
-	ft_lstadd(&tmp->r.nei, ft_lstnew(nei, ft_strlen(nei) + 1));
+	while (!ft_strequ(tmp_sec->r.name, nei))
+		tmp_sec = tmp_sec->next;
+	rlist_add(&tmp->r.nei, rlist_new(tmp_sec->r));
 }
 
-void	convert_tube(t_env *lem, char *line, size_t cut)
+char	r_exists(t_rlist *tmp, const char *line)
 {
-	size_t	hash;
-	size_t	hash_sec;
-
-	line[cut] = '\0';
-	hash = get_hash_index(line);
-	hash_sec = get_hash_index(line + cut + 1);
-	if (!lem->hash[hash] || !lem->hash[hash_sec])
+	while (tmp)
 	{
-		ft_printf("Error tube : Room doesn't exist.\n");
-		line[cut] = '-';
-		return ;
+		if (ft_strequ(tmp->r.name, line))
+			return (1);
+		tmp = tmp->next;
 	}
-	push_tube_in_room(lem, line, line + cut + 1, hash);
-	push_tube_in_room(lem, line + cut + 1, line, hash_sec);
-	line[cut] = '-';
+	return (0);
+}
+
+void	convert_tube(t_env *lem, t_parser *pars, char *line)
+{
+	char	*cpy;
+	size_t	h;
+	size_t	h_sec;
+
+	cpy = pars->slh;
+	*pars->slh = '\0';
+	pars->slh++;
+	h = get_hash_index(line);
+	h_sec = get_hash_index(pars->slh);
+	if (!r_exists(lem->hash[h], line))
+		ft_printf("Error tube : Room <%s> doesn't exist.\n", line);
+	else if (!r_exists(lem->hash[h_sec], pars->slh))
+		ft_printf("Error tube : Room <%s> doesn't exist.\n", pars->slh);
+	else
+	{
+		push_t_in_r(lem, line, pars->slh, h, h_sec);
+		push_t_in_r(lem, pars->slh, line, h_sec, h);
+	}
+	*cpy = '-';
 }

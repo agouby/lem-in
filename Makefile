@@ -6,12 +6,12 @@
 #    By: agouby <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/09 13:13:02 by agouby            #+#    #+#              #
-#    Updated: 2017/09/07 21:57:43 by agouby           ###   ########.fr        #
+#    Updated: 2017/09/09 11:58:52 by agouby           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-COMP_LIB = y
-CC = gcc -g
+COMP_LIB = n
+CC = gcc
 CFLA = -Wall -Werror -Wextra  
 NAME = lem-in
 INC = -I./includes

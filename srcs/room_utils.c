@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 17:24:02 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/07 21:17:50 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/09 16:26:36 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ static char	got_double_room(t_env *lem, const char *line, size_t hash)
 	return (0);
 }
 
-char	valid_room_name(const char *line)
+char		valid_room_name(const char *line)
 {
 	if (*line == ' ' || *line == 'L')
 		return (0);
 	return (1);
 }
 
-char	valid_room_coords(const char *line)
+char		valid_room_coords(const char *line)
 {
 	while (*line)
 	{
@@ -46,30 +46,36 @@ char	valid_room_coords(const char *line)
 	return (1);
 }
 
-void	create_room(t_env *lem, t_parser *pars, char *line, size_t cut)
+void		cpy_start_end(t_env *lem, t_parser *pars, size_t hash)
 {
-	t_room	r;
-	size_t	hash;
-
-	*pars->slh = '\0';
-	hash = get_hash_index(line);
-	if (got_double_room(lem, line, hash))
-	{
-		*pars->slh = ' ';
-		return ;
-	}
-	*pars->slh = ' ';
-	r.name = ft_strndup(line, cut);
-	while (line[cut] && ft_isspace(line[cut]))
-		cut++;
-	r.x = ft_atoi(line + cut);
-	while (ft_isdigit(line[cut]))
-		cut++;
-	r.y = ft_atoi(line + cut);
-	r.nei = NULL;
-	rlist_add(&lem->hash[hash], rlist_new(r));
 	if (pars->got_start)
 		lem->start = lem->hash[hash];
 	else if (pars->got_end)
 		lem->end = lem->hash[hash];
+}
+
+void		create_room(t_env *lem, t_parser *pars, char *line)
+{
+	t_room	*r;
+	char	*cpy;
+	size_t	hash;
+
+	r = (t_room *)malloc()
+	cpy = pars->slh;
+	*pars->slh = '\0';
+	pars->slh++;
+	hash = get_hash_index(line);
+	if (got_double_room(lem, line, hash))
+		*cpy = ' ';
+	else
+	{
+		if (!(r.name = ft_strdup(line)))
+			ft_memerr();
+		get_r_coords(&r, pars->slh);
+		r.nei = NULL;
+		r.al_vis = 0;
+		rlist_add(&lem->hash[hash], rlist_new(r));
+		cpy_start_end(lem, pars, hash);
+		*cpy = ' ';
+	}
 }

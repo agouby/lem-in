@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 13:14:55 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/07 21:57:19 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/09 16:26:13 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,20 @@
 # include "ft_printf.h"
 # include "parser.h"
 
-# define H_SIZE 200000
+# define H_SIZE 1000000
 
 typedef struct	s_room
 {
 	char	*name;
-	t_list	*nei;
+	int 	al_vis;
+	struct s_rlist	*nei;
 	size_t	x;
 	size_t	y;
 }				t_room;
 
 typedef struct	s_rlist
 {
-	t_room			r;
+	t_room			*r;
 	struct s_rlist	*next;
 }				t_rlist;
 
@@ -38,14 +39,16 @@ typedef struct	s_env
 	t_rlist	**hash;
 	t_rlist	*start;
 	t_rlist	*end;
+	t_list	*paths;
+	t_rlist	*queue;
 	t_list	*file;
 }				t_env;
 
 void			parse_map(t_env *lem);
 t_list			*push_in_list(char *line);
 void			del_file(void *content, size_t size);
-void			create_room(t_env *lem, t_parser *pars, char *line, size_t cut);
-void			convert_tube(t_env *lem, char *line, size_t cut);
+void			create_room(t_env *lem, t_parser *pars, char *line);
+void			convert_tube(t_env *lem, t_parser *pars, char *line);
 char			is_comment(const char *line);
 char			is_command(const char *line);
 char			is_room(t_parser *pars, const char *line);
@@ -64,5 +67,8 @@ size_t			get_hash_index(const char *str);
 void			ants_err(char **line, ssize_t gnl_ret);
 t_rlist			*rlist_new(t_room r);
 void			rlist_add(t_rlist **old, t_rlist *fresh);
+void			print_file(t_env lem);
+void			get_r_coords(t_room *r, char *line);
+void			get_paths(t_env *lem);
 
 #endif

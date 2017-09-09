@@ -1,0 +1,13 @@
+42
+##start
+start 0 0
+##end
+end 0 0
+A 0 0
+B 0 0
+C 0 0
+start-A
+start-B
+B-C
+A-end
+C-end
