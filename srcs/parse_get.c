@@ -12,16 +12,16 @@
 
 #include "lem_in.h"
 
-void	get_ants(t_env *lem, t_parser *pars)
+void	get_ants(t_env *lem, ssize_t gnl_ret)
 {
 	char	*line;
 
 	line = NULL;
-	get_next_line(0, &line);
+	gnl_ret = get_next_line(0, &line);
 	if (ft_strisdigit(line) && (lem->ants_nb = ft_atou(line)) > 0)
 		ft_lstadd(&lem->file, push_in_list(line));
 	else
-		parse_error(pars, &line);
+		ants_err(&line, gnl_ret);
 }
 
 void	get_command(t_parser *pars, char *line)
@@ -62,6 +62,8 @@ void	get_tube(t_env *lem, t_parser *pars, char *line)
 	size_t	cut;
 
 	cut = pars->slh - line;
+	if (!pars->got_tube)
+		pars->got_tube = 1;
 	if (pars->command_cnt != 2 || *line == '-')
 	{
 		parse_error(pars, &line);

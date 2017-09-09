@@ -12,20 +12,20 @@
 
 #include "lem_in.h"
 
-void	rlist_add(t_rlist **old, t_rlist *new)
+static char	got_double_room(t_env *lem, const char *line, size_t hash)
 {
-	new->next = *old;
-	*old = new;
-}
+	t_rlist	*tmp;
 
-t_rlist	*rlist_new(t_room r)
-{
-	t_rlist *new;
-
-	new = (t_rlist *)malloc(sizeof(t_rlist));
-	new->r = r;
-	new->next = NULL;
-	return (new);
+	tmp = lem->hash[hash];
+	if (!tmp)
+		return (0);
+	while (tmp)
+	{
+		if (ft_strequ(line, tmp->r.name))
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
 }
 
 char	valid_room_name(const char *line)
@@ -49,19 +49,24 @@ char	valid_room_coords(const char *line)
 void	create_room(t_env *lem, t_parser *pars, char *line, size_t cut)
 {
 	t_room	r;
-	size_t	i;
 	size_t	hash;
 
-	i = cut;
-	if (!(r.name = ft_strndup(line, cut)))
-		ft_memerr();
-	while (line[i] && ft_isspace(line[i]))
-		i++;
-	r.x = ft_atoi(line + i);
-	i = i + ft_count_digit(r.x, 10);
-	r.y = ft_atoi(line + i);
+	*pars->slh = '\0';
+	hash = get_hash_index(line);
+	if (got_double_room(lem, line, hash))
+	{
+		*pars->slh = ' ';
+		return ;
+	}
+	*pars->slh = ' ';
+	r.name = ft_strndup(line, cut);
+	while (line[cut] && ft_isspace(line[cut]))
+		cut++;
+	r.x = ft_atoi(line + cut);
+	while (ft_isdigit(line[cut]))
+		cut++;
+	r.y = ft_atoi(line + cut);
 	r.nei = NULL;
-	hash = get_hash_index(r.name);
 	rlist_add(&lem->hash[hash], rlist_new(r));
 	if (pars->got_start)
 		lem->start = lem->hash[hash];

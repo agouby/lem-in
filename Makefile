@@ -11,8 +11,8 @@
 # **************************************************************************** #
 
 COMP_LIB = y
-CC = gcc
-#CFLA = -Wall -Werror -Wextra
+CC = gcc -g
+CFLA = -Wall -Werror -Wextra  
 NAME = lem-in
 INC = -I./includes
 INC_LIB = -I./libft/includes

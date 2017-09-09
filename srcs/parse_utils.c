@@ -24,13 +24,14 @@ void	parse_error(t_parser *pars, char **line)
 	pars->err = 1;
 }
 
-void	read_and_delete(t_parser pars, char *line)
+void	read_and_delete(char *line, ssize_t gnl_ret)
 {
-	if (!pars.gnl_ret)
+	if (!gnl_ret)
 	{
 		ft_strdel(&line);
 		return ;
 	}
 	while (get_next_line(0, &line))
 		ft_strdel(&line);
+	ft_strdel(&line);
 }

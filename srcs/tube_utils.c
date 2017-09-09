@@ -27,7 +27,7 @@ void	push_tube_in_room(t_env *lem, char *cur, char *nei, size_t hash)
 			return ;
 		tmp_nei = tmp_nei->next;
 	}
-	ft_lstadd(&tmp->r.nei, ft_lstnew(nei, ft_strlen(nei)));
+	ft_lstadd(&tmp->r.nei, ft_lstnew(nei, ft_strlen(nei) + 1));
 }
 
 void	convert_tube(t_env *lem, char *line, size_t cut)
@@ -41,6 +41,7 @@ void	convert_tube(t_env *lem, char *line, size_t cut)
 	if (!lem->hash[hash] || !lem->hash[hash_sec])
 	{
 		ft_printf("Error tube : Room doesn't exist.\n");
+		line[cut] = '-';
 		return ;
 	}
 	push_tube_in_room(lem, line, line + cut + 1, hash);

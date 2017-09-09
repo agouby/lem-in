@@ -16,7 +16,7 @@
 # include "ft_printf.h"
 # include "parser.h"
 
-# define H_SIZE 1
+# define H_SIZE 200000
 
 typedef struct	s_room
 {
@@ -52,14 +52,17 @@ char			is_room(t_parser *pars, const char *line);
 char			is_tube(t_parser *pars, const char *line);
 char			valid_room_name(const char *line);
 char			valid_room_coords(const char *line);
-void			get_ants(t_env *lem, t_parser *pars);
+void			get_ants(t_env *lem, ssize_t gnl_ret);
 void			get_command(t_parser *pars, char *line);
 void			get_room(t_env *lem, t_parser *pars, char *line);
 void			get_tube(t_env *lem, t_parser *pars, char *line);
 void			parse_error(t_parser *pars, char **line);
 void			command_unknown(const char *line);
-void			read_and_delete(t_parser pars, char *line);
+void			read_and_delete(char *line, ssize_t gnl_ret);
 void			print_hash(t_env *lem);
 size_t			get_hash_index(const char *str);
+void			ants_err(char **line, ssize_t gnl_ret);
+t_rlist			*rlist_new(t_room r);
+void			rlist_add(t_rlist **old, t_rlist *fresh);
 
 #endif
