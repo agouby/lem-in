@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 13:20:42 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/09 15:06:57 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/09 19:56:13 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	check_args(t_env lem, const char **av)
 			print_hash(&lem);
 		else if (ft_strequ(*av, "-pf"))
 			print_file(lem);
+		else if (ft_strequ(*av, "-pp"))
+			get_paths(&lem);
 		av++;
 	}
 }
@@ -32,6 +34,5 @@ int		main(int ac, const char **av)
 	ft_memset(&lem, 0, sizeof(lem));
 	parse_map(&lem);
 	check_args(lem, av);
-	get_paths(&lem);
 	return (0);
 }

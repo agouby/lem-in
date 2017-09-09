@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 17:24:02 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/09 16:26:36 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/09 21:20:40 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	got_double_room(t_env *lem, const char *line, size_t hash)
 		return (0);
 	while (tmp)
 	{
-		if (ft_strequ(line, tmp->r.name))
+		if (ft_strequ(line, tmp->r->name))
 			return (1);
 		tmp = tmp->next;
 	}
@@ -60,7 +60,7 @@ void		create_room(t_env *lem, t_parser *pars, char *line)
 	char	*cpy;
 	size_t	hash;
 
-	r = (t_room *)malloc()
+	r = (t_room *)malloc(sizeof(t_room));
 	cpy = pars->slh;
 	*pars->slh = '\0';
 	pars->slh++;
@@ -69,11 +69,12 @@ void		create_room(t_env *lem, t_parser *pars, char *line)
 		*cpy = ' ';
 	else
 	{
-		if (!(r.name = ft_strdup(line)))
+		if (!(r->name = ft_strdup(line)))
 			ft_memerr();
-		get_r_coords(&r, pars->slh);
-		r.nei = NULL;
-		r.al_vis = 0;
+		get_r_coords(r, pars->slh);
+		r->nei = NULL;
+		r->al_vis = 0;
+		r->score = -1;
 		rlist_add(&lem->hash[hash], rlist_new(r));
 		cpy_start_end(lem, pars, hash);
 		*cpy = ' ';

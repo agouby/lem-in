@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 18:57:16 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/09 13:32:44 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/09 16:28:49 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ void	print_hash(t_env *lem)
 		{
 			while (lem->hash[i])
 			{
-				ft_printf("%s (%d, %d)\n", lem->hash[i]->r.name,
-						lem->hash[i]->r.x, lem->hash[i]->r.y);
-				while (lem->hash[i]->r.nei)
+				ft_printf("%s (%d, %d)\n", lem->hash[i]->r->name,
+						lem->hash[i]->r->x, lem->hash[i]->r->y);
+				while (lem->hash[i]->r->nei)
 				{
-					ft_printf("    %s\n", lem->hash[i]->r.nei->r.name);
-					lem->hash[i]->r.nei = lem->hash[i]->r.nei->next;
+					ft_printf("    %s\n", lem->hash[i]->r->nei->r->name);
+					lem->hash[i]->r->nei = lem->hash[i]->r->nei->next;
 				}
 				lem->hash[i] = lem->hash[i]->next;
 			}

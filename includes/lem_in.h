@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 13:14:55 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/09 16:26:13 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/09 21:32:54 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@
 
 typedef struct	s_room
 {
-	char	*name;
-	int 	al_vis;
+	char			*name;
+	int 			al_vis;
+	ssize_t			score;
 	struct s_rlist	*nei;
-	size_t	x;
-	size_t	y;
+	size_t			x;
+	size_t			y;
 }				t_room;
 
 typedef struct	s_rlist
@@ -39,9 +40,10 @@ typedef struct	s_env
 	t_rlist	**hash;
 	t_rlist	*start;
 	t_rlist	*end;
-	t_list	*paths;
+	t_rlist	*paths;
 	t_rlist	*queue;
 	t_list	*file;
+	size_t	start_fnd;
 }				t_env;
 
 void			parse_map(t_env *lem);
@@ -65,10 +67,12 @@ void			read_and_delete(char *line, ssize_t gnl_ret);
 void			print_hash(t_env *lem);
 size_t			get_hash_index(const char *str);
 void			ants_err(char **line, ssize_t gnl_ret);
-t_rlist			*rlist_new(t_room r);
+t_rlist			*rlist_new(t_room *r);
+t_rlist			*rlist_newalloc(t_room *r);
 void			rlist_add(t_rlist **old, t_rlist *fresh);
 void			print_file(t_env lem);
 void			get_r_coords(t_room *r, char *line);
 void			get_paths(t_env *lem);
+void			del_last_queue(t_rlist **cur);
 
 #endif

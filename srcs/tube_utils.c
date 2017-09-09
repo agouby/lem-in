@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 13:33:58 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/09 16:04:15 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/09 17:02:47 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,25 @@ void	push_t_in_r(t_env *lem, char *cur, char *nei, size_t h, size_t h_sec)
 
 	tmp = lem->hash[h];
 	tmp_sec = lem->hash[h_sec];
-	while (tmp && !ft_strequ(tmp->r.name, cur))
+	while (tmp && !ft_strequ(tmp->r->name, cur))
 		tmp = tmp->next;
-	tmp_nei = tmp->r.nei;
+	tmp_nei = tmp->r->nei;
 	while (tmp_nei)
 	{
-		if (ft_strequ(tmp_nei->r.name, nei))
+		if (ft_strequ(tmp_nei->r->name, nei))
 			return ;
 		tmp_nei = tmp_nei->next;
 	}
-	while (!ft_strequ(tmp_sec->r.name, nei))
+	while (!ft_strequ(tmp_sec->r->name, nei))
 		tmp_sec = tmp_sec->next;
-	rlist_add(&tmp->r.nei, rlist_new(tmp_sec->r));
+	rlist_add(&tmp->r->nei, rlist_new(tmp_sec->r));
 }
 
 char	r_exists(t_rlist *tmp, const char *line)
 {
 	while (tmp)
 	{
-		if (ft_strequ(tmp->r.name, line))
+		if (ft_strequ(tmp->r->name, line))
 			return (1);
 		tmp = tmp->next;
 	}
