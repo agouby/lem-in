@@ -15,6 +15,8 @@
 void	print_hash(t_env *lem)
 {
 	size_t	i;
+	t_rlist *tmp;
+	t_rlist *tmp_nei;
 
 	i = 0;
 	ft_printf("PRINTING INFOS :\n\n");
@@ -22,16 +24,18 @@ void	print_hash(t_env *lem)
 	{
 		if (lem->hash[i])
 		{
-			while (lem->hash[i])
+			tmp = lem->hash[i];
+			while (tmp)
 			{
-				ft_printf("%s (%d, %d)\n", lem->hash[i]->r->name,
-						lem->hash[i]->r->x, lem->hash[i]->r->y);
-				while (lem->hash[i]->r->nei)
+				ft_printf("%s (%d, %d)\n", tmp->r->name,
+						tmp->r->x, tmp->r->y);
+				tmp_nei = tmp->r->nei;
+				while (tmp_nei)
 				{
-					ft_printf("    %s\n", lem->hash[i]->r->nei->r->name);
-					lem->hash[i]->r->nei = lem->hash[i]->r->nei->next;
+					ft_printf("    %s\n", tmp_nei->r->name);
+					tmp_nei = tmp_nei->next;
 				}
-				lem->hash[i] = lem->hash[i]->next;
+				tmp = tmp->next;
 			}
 		}
 		i++;
