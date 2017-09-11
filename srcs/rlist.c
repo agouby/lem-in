@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 11:43:43 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/09 21:04:48 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/11 20:25:35 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_rlist	*rlist_newalloc(t_room *r)
 	return (new);
 }
 
-void		del_last_queue(t_rlist **queue)
+t_rlist		*del_last_queue(t_rlist **queue)
 {
 	t_rlist *tmp;
 	t_rlist *prev;
@@ -48,7 +48,7 @@ void		del_last_queue(t_rlist **queue)
 	if (!tmp->next)
 	{
 		*queue = NULL;
-		return ;
+		return (NULL);
 	}
 	while (tmp->next)
 	{
@@ -57,4 +57,5 @@ void		del_last_queue(t_rlist **queue)
 	}
 	free(prev->next);
 	prev->next = NULL;
+	return (prev);
 }

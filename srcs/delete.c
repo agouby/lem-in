@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 18:57:16 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/09 16:28:49 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/11 17:45:28 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	print_hash(t_env *lem)
 			tmp = lem->hash[i];
 			while (tmp)
 			{
-				ft_printf("%s (%d, %d)\n", tmp->r->name,
-						tmp->r->x, tmp->r->y);
+				ft_printf("%s (%d, %d) BANNED : %d AL_VIS : %d\n", tmp->r->name,
+						tmp->r->x, tmp->r->y, tmp->r->banned, tmp->r->al_vis);
 				tmp_nei = tmp->r->nei;
 				while (tmp_nei)
 				{

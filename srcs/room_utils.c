@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 17:24:02 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/09 21:20:40 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/11 17:32:28 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void		create_room(t_env *lem, t_parser *pars, char *line)
 		r->nei = NULL;
 		r->al_vis = 0;
 		r->score = -1;
+		r->banned = 0;
 		rlist_add(&lem->hash[hash], rlist_new(r));
 		cpy_start_end(lem, pars, hash);
 		*cpy = ' ';

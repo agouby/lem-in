@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 11:54:49 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/09 21:33:33 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/11 20:41:38 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	print_path(t_env *lem)
 			ft_printf(" - ");
 		lem->paths = lem->paths->next;
 	}
-	ft_printf("\n");
+	ft_printf("\n\n");
 }
 
 int		alrdy_in_queue(char *name, t_rlist *queue)
@@ -49,80 +49,97 @@ int		alrdy_in_queue(char *name, t_rlist *queue)
 
 void	write_nei_in_queue(t_env *lem, t_room *r)
 {
-	t_room *tmp;
+	t_room	*tmp;
+	t_rlist	*nei_tmp;
 
 	tmp = r;
-//	ft_printf("FOR %s :\n", r->name);
-	while (tmp->nei)
+	nei_tmp = tmp->nei;
+	while (nei_tmp)
 	{
-		if (!tmp->nei->r->al_vis)
+		if (!nei_tmp->r->al_vis && !nei_tmp->r->banned)
 		{
-//			ft_printf("\t%s\n", tmp->nei->r->name);
-			tmp->nei->r->score = r->score + 1;
-			tmp->nei->r->al_vis = 1;
-			if (ft_strequ(tmp->nei->r->name, lem->start->r->name))
+			nei_tmp->r->score = r->score + 1;
+			nei_tmp->r->al_vis = 1;
+			if (ft_strequ(nei_tmp->r->name, lem->start->r->name))
 				lem->start_fnd = 1;
-			rlist_add(&lem->queue, rlist_newalloc(tmp->nei->r));
+			rlist_add(&lem->queue, rlist_newalloc(nei_tmp->r));
 		}
-		tmp->nei = tmp->nei->next;
+		nei_tmp = nei_tmp->next;
 	}
-//	tmp->al_vis = 1;
 }
 
-t_rlist	*get_last(t_rlist *queue)
+void	del_queue(t_rlist **queue)
 {
 	t_rlist *tmp;
 
-	tmp = queue;
-	while (tmp->next)
+	while (*queue)
 	{
-		tmp = tmp->next;
+		tmp = (*queue)->next;
+		free(*queue);
+		*queue = tmp;
 	}
-	return (tmp);
+	*queue = NULL;
 }
 
 void	score_map(t_env *lem)
 {
 	t_rlist *cur;
 
-	int i = 0;
-
 	cur = lem->end;
 	cur->r->score = 0;
 	rlist_add(&lem->queue, rlist_new(cur->r));
-//	print_queue(lem->queue);
 	while (lem->queue && !lem->start_fnd)
 	{
-//		ft_printf("%s\n", cur->r->name);
 		write_nei_in_queue(lem, cur->r);
-//		lem->queue = lem->queue->next;	
-//		print_queue(lem->queue);
-		del_last_queue(&lem->queue);
-//		lem->queue = lem->queue->next;
-		cur = get_last(lem->queue);
-//		ft_printf("NEW = %s\n", cur->r->name);
+		cur = del_last_queue(&lem->queue);
+	}
+	del_queue(&lem->queue);
+}
+
+void		init_al_vis(t_rlist **hash)
+{
+	size_t	i;
+	t_rlist *tmp;
+	
+	i = 0;
+	while (i < H_SIZE)
+	{
+		tmp = hash[i];
+		if (hash[i])
+		{
+			while (tmp)
+			{
+				tmp->r->al_vis = 0;
+				tmp->r->score = -1;
+				tmp = tmp->next;
+			}
+			hash[i]->r->score = -1;
+			hash[i]->r->al_vis = 0;
+		}
 		i++;
 	}
 }
 
-t_rlist 	*get_next_room(t_room *cur)
+t_rlist 	*get_next_room(t_env *lem, t_room *cur)
 {
 	ssize_t	i;
 	t_rlist	*ret;
 	t_rlist	*tmp;
 
-	i = 99999;
+	i = -1;
 	ret = cur->nei;
 	tmp = cur->nei;
 	while (tmp)
 	{
-		if (tmp->r->score != -1 && tmp->r->score < i)
+		if (tmp->r->score != -1 && (tmp->r->score < i || i == -1))
 		{
 			i = tmp->r->score;
 			ret = tmp;
 		}
 		tmp = tmp->next;
 	}
+	if (ret->r != lem->end->r)
+	   ret->r->banned = 1;
 	return (ret);
 }
 
@@ -135,9 +152,7 @@ void	rebuild_path(t_env *lem)
 	rlist_add(&lem->paths, rlist_new(cur->r));
 	while (cur->r != lem->end->r)
 	{
-		cur = get_next_room(cur->r);
-		ft_printf("%s, %d\n", cur->r->name, cur->r->score);
-//		ft_printf("%s\n", cur->r->name);
+		cur = get_next_room(lem, cur->r);
 		rlist_add(&lem->paths, rlist_new(cur->r));
 	}
 	print_path(lem);
@@ -145,6 +160,13 @@ void	rebuild_path(t_env *lem)
 
 void	get_paths(t_env *lem)
 {
-	score_map(lem);
-	rebuild_path(lem);
+	while (1)
+	{
+		lem->start_fnd = 0;
+		score_map(lem);
+		if (!lem->start_fnd)
+			ft_print_error("END OF PATHS");
+		rebuild_path(lem);
+		init_al_vis(lem->hash);
+	}
 }

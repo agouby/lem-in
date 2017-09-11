@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 13:14:55 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/09 21:32:54 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/11 20:31:24 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@
 # include "ft_printf.h"
 # include "parser.h"
 
-# define H_SIZE 1000000
+# define H_SIZE 200000
 
 typedef struct	s_room
 {
 	char			*name;
 	int 			al_vis;
 	ssize_t			score;
+	char			banned;
 	struct s_rlist	*nei;
 	size_t			x;
 	size_t			y;
@@ -73,6 +74,6 @@ void			rlist_add(t_rlist **old, t_rlist *fresh);
 void			print_file(t_env lem);
 void			get_r_coords(t_room *r, char *line);
 void			get_paths(t_env *lem);
-void			del_last_queue(t_rlist **cur);
+t_rlist			*del_last_queue(t_rlist **cur);
 
 #endif
