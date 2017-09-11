@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 13:14:55 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/11 20:31:24 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/11 21:56:43 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 # include "ft_printf.h"
 # include "parser.h"
 
-# define H_SIZE 200000
+# define H_SIZE 10000000
 
 typedef struct	s_room
 {
-	char			*name;
+	char	*name;
 	int 			al_vis;
 	ssize_t			score;
-	char			banned;
+	unsigned char	banned;
 	struct s_rlist	*nei;
 	size_t			x;
 	size_t			y;
@@ -37,14 +37,15 @@ typedef struct	s_rlist
 
 typedef struct	s_env
 {
-	size_t	ants_nb;
-	t_rlist	**hash;
-	t_rlist	*start;
-	t_rlist	*end;
-	t_rlist	*paths;
-	t_rlist	*queue;
-	t_list	*file;
-	size_t	start_fnd;
+	size_t			ants_nb;
+	unsigned char	direct;
+	t_rlist			**hash;
+	t_rlist			*start;
+	t_rlist			*end;
+	t_list			*paths;
+	t_rlist			*queue;
+	t_list			*file;
+	size_t			start_fnd;
 }				t_env;
 
 void			parse_map(t_env *lem);

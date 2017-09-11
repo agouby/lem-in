@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 11:54:49 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/11 20:41:38 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/11 21:48:12 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_path(t_env *lem)
 	ft_printf("PRINTING PATH \n\n");
 	while (lem->paths)
 	{
-		ft_printf("%s", lem->paths->r->name);
+		ft_printf("%s", lem->paths->content);
 		if (lem->paths->next)
 			ft_printf(" - ");
 		lem->paths = lem->paths->next;
@@ -76,7 +76,7 @@ void	del_queue(t_rlist **queue)
 	{
 		tmp = (*queue)->next;
 		free(*queue);
-		*queue = tmp;
+		*queue = NULL;
 	}
 	*queue = NULL;
 }
@@ -149,23 +149,46 @@ void	rebuild_path(t_env *lem)
 
 	cur = lem->start;
 	lem->end->r->score = 0;
-	rlist_add(&lem->paths, rlist_new(cur->r));
+	ft_lstadd(&lem->paths, ft_lstnew_noalloc(cur->r->name));
 	while (cur->r != lem->end->r)
 	{
 		cur = get_next_room(lem, cur->r);
-		rlist_add(&lem->paths, rlist_new(cur->r));
+		ft_lstadd(&lem->paths, ft_lstnew_noalloc(cur->r->name));
+//		ft_lstadd(&lem->paths, rlist_new(cur->r));
 	}
 	print_path(lem);
 }
 
+unsigned char is_in_list(t_rlist *list, char *str)
+{
+	while (list)
+	{
+		if (ft_strequ(list->r->name, str))
+			return (1);
+		list = list->next;
+	}
+	return (0);
+}
+
+void	check_direct_map(t_env *lem)
+{
+	lem->direct = is_in_list(lem->start->r->nei, lem->end->r->name);
+}
+
 void	get_paths(t_env *lem)
 {
+	check_direct_map(lem);
+	if (lem->direct)
+		return ;
 	while (1)
 	{
 		lem->start_fnd = 0;
 		score_map(lem);
 		if (!lem->start_fnd)
-			ft_print_error("END OF PATHS");
+		{
+			ft_printf("END OF PATHS\n");
+			return ;
+		}
 		rebuild_path(lem);
 		init_al_vis(lem->hash);
 	}

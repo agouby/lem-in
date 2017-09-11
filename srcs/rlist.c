@@ -6,19 +6,19 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 11:43:43 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/11 20:25:35 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/11 21:43:18 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	rlist_add(t_rlist **old, t_rlist *new)
+void		rlist_add(t_rlist **old, t_rlist *new)
 {
 	new->next = *old;
 	*old = new;
 }
 
-t_rlist	*rlist_new(t_room *r)
+t_rlist		*rlist_new(t_room *r)
 {
 	t_rlist *new;
 
@@ -28,7 +28,7 @@ t_rlist	*rlist_new(t_room *r)
 	return (new);
 }
 
-t_rlist	*rlist_newalloc(t_room *r)
+t_rlist		*rlist_newalloc(t_room *r)
 {
 	t_rlist *new;
 
