@@ -42,5 +42,6 @@ void	parse_map(t_env *lem)
 	{
 		parsing_process(lem, &pars, line);
 	}
+	ft_printf("PARSING DONE.\n\n");
 	read_and_delete(line, gnl_ret);
 }

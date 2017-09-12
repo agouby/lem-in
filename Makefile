@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-COMP_LIB = n
+COMP_LIB = y
 CC = gcc
 CFLA = -Wall -Werror -Wextra  
 NAME = lem-in

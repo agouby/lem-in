@@ -70,11 +70,8 @@ void	write_nei_in_queue(t_env *lem, t_room *r)
 
 void	del_queue(t_rlist **queue)
 {
-	t_rlist *tmp;
-
 	while (*queue)
 	{
-		tmp = (*queue)->next;
 		free(*queue);
 		*queue = NULL;
 	}
@@ -154,7 +151,6 @@ void	rebuild_path(t_env *lem)
 	{
 		cur = get_next_room(lem, cur->r);
 		ft_lstadd(&lem->paths, ft_lstnew_noalloc(cur->r->name));
-//		ft_lstadd(&lem->paths, rlist_new(cur->r));
 	}
 	print_path(lem);
 }
@@ -170,6 +166,21 @@ unsigned char is_in_list(t_rlist *list, char *str)
 	return (0);
 }
 
+size_t	get_start_nei(t_rlist *start)
+{
+	t_rlist *tmp;
+	size_t	i;
+
+	tmp = start->r->nei;
+	i = 0;
+	while (tmp)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	return (i);
+}
+
 void	check_direct_map(t_env *lem)
 {
 	lem->direct = is_in_list(lem->start->r->nei, lem->end->r->name);
@@ -177,10 +188,15 @@ void	check_direct_map(t_env *lem)
 
 void	get_paths(t_env *lem)
 {
+
+	int max_path;
+
+
+	max_path = get_start_nei(lem->start);
 	check_direct_map(lem);
 	if (lem->direct)
 		return ;
-	while (1)
+	while (max_path)
 	{
 		lem->start_fnd = 0;
 		score_map(lem);
@@ -189,6 +205,7 @@ void	get_paths(t_env *lem)
 			ft_printf("END OF PATHS\n");
 			return ;
 		}
+		max_path--;
 		rebuild_path(lem);
 		init_al_vis(lem->hash);
 	}
