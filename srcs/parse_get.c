@@ -12,16 +12,17 @@
 
 #include "lem_in.h"
 
-void	get_ants(t_env *lem, ssize_t gnl_ret)
+void	get_ants(t_env *lem, t_parser *pars, ssize_t *gnl_ret)
 {
 	char	*line;
 
 	line = NULL;
-	gnl_ret = get_next_line(0, &line);
+	*gnl_ret = get_next_line(0, &line);
+	pars->ln++;	
 	if (ft_strisdigit(line) && (lem->ants_nb = ft_atou(line)) > 0)
-		ft_lstadd(&lem->file, push_in_list(line));
+		push_in_file(lem, line);
 	else
-		ants_err(&line, gnl_ret);
+		parse_err(pars, &line, ERR_ANT);
 }
 
 void	get_command(t_parser *pars, char *line)
@@ -30,19 +31,24 @@ void	get_command(t_parser *pars, char *line)
 		pars->got_start++;
 	else if (ft_strequ(line, "##end"))
 		pars->got_end++;
-	else
-		command_unknown(line);
+//	else
+//		command_unknown(line);
 	if (pars->got_start > 1 || pars->got_end > 1)
-		parse_error(pars, &line);
+		parse_err(pars, &line, ERR_CMD);
 	else if (pars->got_start && pars->got_end)
-		parse_error(pars, &line);
+		parse_err(pars, &line, ERR_CMD);
 }
 
 void	get_room(t_env *lem, t_parser *pars, char *line)
 {
-	if (!valid_room_name(line) || !valid_room_coords(pars->slh))
+	if (!valid_room_name(line))
 	{
-		parse_error(pars, &line);
+		parse_err(pars, &line, ERR_RNAME);
+		return ;
+	}
+	if (!valid_room_coords(pars->slh))
+	{
+		parse_err(pars, &line, ERR_COORD);
 		return ;
 	}
 	if (!pars->got_room)
@@ -60,7 +66,7 @@ void	get_tube(t_env *lem, t_parser *pars, char *line)
 		pars->got_tube = 1;
 	if (pars->command_cnt != 2 || *line == '-')
 	{
-		parse_error(pars, &line);
+		parse_err(pars, &line, ERR_CMD);
 		return ;
 	}
 	convert_tube(lem, pars, line);

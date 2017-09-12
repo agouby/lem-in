@@ -12,19 +12,16 @@
 
 #include "lem_in.h"
 
-t_list	*push_in_list(char *content)
-{
-	t_list *new;
-
-	if (!(new = (t_list *)malloc(sizeof(t_list))))
-		ft_memerr();
-	new->content = content;
-	new->next = NULL;
-	return (new);
-}
-
 void	del_file(void *content, size_t size)
 {
 	(void)size;
 	ft_strdel((char **)&content);
+}
+
+void	push_in_file(t_env *lem, char *line)
+{
+	if (lem->args.pfile)
+		ft_lstadd(&lem->file, ft_lstnew_noalloc(line));
+	else
+		ft_strdel(&line);
 }

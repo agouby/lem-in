@@ -22,6 +22,7 @@ typedef struct	s_parser
 	unsigned char	got_start;
 	unsigned char	got_end;
 	unsigned char	err : 1;
+	size_t			ln;
 	size_t			command_cnt;
 }				t_parser;
 

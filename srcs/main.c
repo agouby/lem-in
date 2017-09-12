@@ -12,27 +12,15 @@
 
 #include "lem_in.h"
 
-void	check_args(t_env lem, const char **av)
-{
-	while (*av)
-	{
-		if (ft_strequ(*av, "-ph"))
-			print_hash(&lem);
-		else if (ft_strequ(*av, "-pf"))
-			print_file(lem);
-		else if (ft_strequ(*av, "-pp"))
-			get_paths(&lem);
-		av++;
-	}
-}
-
 int		main(int ac, const char **av)
 {
 	t_env	lem;
 
 	(void)ac;
 	ft_memset(&lem, 0, sizeof(lem));
+	init_err_tab(&lem);
+	get_args(&lem, av);
 	parse_map(&lem);
-	check_args(lem, av);
+//	get_paths(&lem);
 	return (0);
 }

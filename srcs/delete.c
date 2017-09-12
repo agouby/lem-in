@@ -19,7 +19,7 @@ void	print_hash(t_env *lem)
 	t_rlist *tmp_nei;
 
 	i = 0;
-	ft_printf("PRINTING INFOS :\n\n");
+	ft_printf("** PRINTING INFOS **\n\n");
 	while (i < H_SIZE)
 	{
 		if (lem->hash[i])
@@ -27,14 +27,18 @@ void	print_hash(t_env *lem)
 			tmp = lem->hash[i];
 			while (tmp)
 			{
-				ft_printf("%s (%d, %d) BANNED : %d AL_VIS : %d\n", tmp->r->name,
-						tmp->r->x, tmp->r->y, tmp->r->banned, tmp->r->al_vis);
-				tmp_nei = tmp->r->nei;
-				while (tmp_nei)
+				ft_printf("%s (%d, %d)\n\t", tmp->r->name, tmp->r->x, tmp->r->y);
+				if (!(tmp_nei = tmp->r->nei))
 				{
-					ft_printf("    %s\n", tmp_nei->r->name);
+					ft_printf("No neighbours\n");
+					break;
+				}
+				while (tmp_nei->next)
+				{
+					ft_printf("%s-", tmp_nei->r->name);
 					tmp_nei = tmp_nei->next;
 				}
+				ft_printf("%s\n", tmp_nei->r->name);
 				tmp = tmp->next;
 			}
 		}

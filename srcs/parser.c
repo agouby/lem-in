@@ -14,6 +14,7 @@
 
 void	parsing_process(t_env *lem, t_parser *pars, char *line)
 {
+	pars->ln++;
 	if (is_comment(line))
 		;
 	else if (is_command(line))
@@ -23,8 +24,8 @@ void	parsing_process(t_env *lem, t_parser *pars, char *line)
 	else if (is_tube(pars, line))
 		get_tube(lem, pars, line);
 	else
-		parse_error(pars, &line);
-	ft_lstadd(&lem->file, ft_lstnew_noalloc(line));
+		parse_err(pars, &line);
+	push_in_file(lem, line);
 }
 
 void	parse_map(t_env *lem)
@@ -36,12 +37,9 @@ void	parse_map(t_env *lem)
 	ft_memset(&pars, 0, sizeof(t_parser));
 	line = NULL;
 	gnl_ret = 0;
-	get_ants(lem, gnl_ret);
+	get_ants(lem, &pars, &gnl_ret);
 	lem->hash = ft_memalloc(H_SIZE * sizeof(t_list *));
 	while (!pars.err && (gnl_ret = get_next_line(0, &line)))
-	{
 		parsing_process(lem, &pars, line);
-	}
-	ft_printf("PARSING DONE.\n\n");
 	read_and_delete(line, gnl_ret);
 }

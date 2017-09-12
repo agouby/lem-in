@@ -15,12 +15,14 @@
 
 # include "ft_printf.h"
 # include "parser.h"
+# include "msg.h"
 
-# define H_SIZE 10000000
+# define H_SIZE		1000000
+# define MAX_PATH	1000
 
 typedef struct	s_room
 {
-	char	*name;
+	char			*name;
 	int 			al_vis;
 	ssize_t			score;
 	unsigned char	banned;
@@ -35,6 +37,16 @@ typedef struct	s_rlist
 	struct s_rlist	*next;
 }				t_rlist;
 
+typedef struct	s_args
+{
+	unsigned char	pinf;
+	unsigned char	pfile;
+	unsigned char	ppath;
+	unsigned char	w;
+	size_t			max_path;
+	
+}				t_args;
+
 typedef struct	s_env
 {
 	size_t			ants_nb;
@@ -45,11 +57,12 @@ typedef struct	s_env
 	t_list			*paths;
 	t_rlist			*queue;
 	t_list			*file;
+	t_args			args;
+	char			*err[NB_ERR + 1];
 	size_t			start_fnd;
 }				t_env;
 
 void			parse_map(t_env *lem);
-t_list			*push_in_list(char *line);
 void			del_file(void *content, size_t size);
 void			create_room(t_env *lem, t_parser *pars, char *line);
 void			convert_tube(t_env *lem, t_parser *pars, char *line);
@@ -59,11 +72,11 @@ char			is_room(t_parser *pars, const char *line);
 char			is_tube(t_parser *pars, const char *line);
 char			valid_room_name(const char *line);
 char			valid_room_coords(const char *line);
-void			get_ants(t_env *lem, ssize_t gnl_ret);
+void			get_ants(t_env *lem, t_parser *pars, ssize_t *gnl_ret);
 void			get_command(t_parser *pars, char *line);
 void			get_room(t_env *lem, t_parser *pars, char *line);
 void			get_tube(t_env *lem, t_parser *pars, char *line);
-void			parse_error(t_parser *pars, char **line);
+void			parse_err(t_parser *pars, char **line, char err);
 void			command_unknown(const char *line);
 void			read_and_delete(char *line, ssize_t gnl_ret);
 void			print_hash(t_env *lem);
@@ -76,5 +89,8 @@ void			print_file(t_env lem);
 void			get_r_coords(t_room *r, char *line);
 void			get_paths(t_env *lem);
 t_rlist			*del_last_queue(t_rlist **cur);
+void			get_args(t_env *lem, const char **av);
+void			push_in_file(t_env *lem, char *line);
+void			init_err_tab(t_env *lem);
 
 #endif

@@ -189,14 +189,11 @@ void	check_direct_map(t_env *lem)
 void	get_paths(t_env *lem)
 {
 
-	int max_path;
-
-
-	max_path = get_start_nei(lem->start);
+//	max_path = get_start_nei(lem->start);
 	check_direct_map(lem);
 	if (lem->direct)
 		return ;
-	while (max_path)
+	while (1)
 	{
 		lem->start_fnd = 0;
 		score_map(lem);
@@ -205,7 +202,7 @@ void	get_paths(t_env *lem)
 			ft_printf("END OF PATHS\n");
 			return ;
 		}
-		max_path--;
+//		max_path--;
 		rebuild_path(lem);
 		init_al_vis(lem->hash);
 	}

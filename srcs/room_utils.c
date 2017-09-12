@@ -46,12 +46,16 @@ char		valid_room_coords(const char *line)
 	return (1);
 }
 
-void		cpy_start_end(t_env *lem, t_parser *pars, size_t hash)
+void get_room_infos(t_room **r, const char *line, char *slh)
 {
-	if (pars->got_start)
-		lem->start = lem->hash[hash];
-	else if (pars->got_end)
-		lem->end = lem->hash[hash];
+	*r = (t_room *)malloc(sizeof(t_room));
+	if (!((*r)->name = ft_strdup(line)))
+		ft_memerr();
+	get_r_coords(*r, slh);
+	(*r)->nei = NULL;
+	(*r)->al_vis = 0;
+	(*r)->score = -1;
+	(*r)->banned = 0;
 }
 
 void		create_room(t_env *lem, t_parser *pars, char *line)
@@ -60,7 +64,6 @@ void		create_room(t_env *lem, t_parser *pars, char *line)
 	char	*cpy;
 	size_t	hash;
 
-	r = (t_room *)malloc(sizeof(t_room));
 	cpy = pars->slh;
 	*pars->slh = '\0';
 	pars->slh++;
@@ -69,15 +72,12 @@ void		create_room(t_env *lem, t_parser *pars, char *line)
 		*cpy = ' ';
 	else
 	{
-		if (!(r->name = ft_strdup(line)))
-			ft_memerr();
-		get_r_coords(r, pars->slh);
-		r->nei = NULL;
-		r->al_vis = 0;
-		r->score = -1;
-		r->banned = 0;
+		get_room_infos(&r, line, pars->slh);
 		rlist_add(&lem->hash[hash], rlist_new(r));
-		cpy_start_end(lem, pars, hash);
+		if (pars->got_start)
+			lem->start = lem->hash[hash];
+		else if (pars->got_end)
+			lem->end = lem->hash[hash];
 		*cpy = ' ';
 	}
 }

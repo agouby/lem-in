@@ -10,8 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
-COMP_LIB = y
+COMP_LIB = n
 CC = gcc
+CHELP = -g -fsanitize=address
 CFLA = -Wall -Werror -Wextra  
 NAME = lem-in
 INC = -I./includes

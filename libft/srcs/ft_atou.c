@@ -16,6 +16,8 @@ unsigned int	ft_atou(const char *str)
 {
 	unsigned int	ret;
 
+	if (!str)
+		return (0);
 	ret = 0;
 	while (ft_isspace(*str))
 		str++;
