@@ -2,24 +2,37 @@
 
 void	init_err_tab(t_env *lem)
 {
-	lem->err[ERR_ANTS] = "No ants.";
-	lem->err[ERR_RNAME] = "Room has invalid name.";
-	lem->err[ERR_COORD] = "Room has invalid coordinates.";
-	lem->err[ERR_LINE]	= "Line has invalid format.";
-	lem->err[ERR_CMD] =	"Multiple start or end commands.";
-	lem->err[ERR_TNAME] = "Tube has invalid name.";
-	lem->err[ERR_NOPATH] = "No path found.";
-	lem->err[WAR_RUNKN] = "Room doesn't exist.";
-	lem->err[WAR_RLONE] = "Room has no neighbours.";
-	lem->err[WAR_CMDUNKN] = "Command is unknown.";
+	lem->err_t[ERR_ANTS] = "No ants.";
+	lem->err_t[ERR_RNAME] = "Room has invalid name.";
+	lem->err_t[ERR_COORD] = "Room has invalid coordinates.";
+	lem->err_t[ERR_LINE] = "Line has invalid format.";
+	lem->err_t[ERR_CMD] = "Multiple start or end commands.";
+	lem->err_t[ERR_TNAME] = "Tube has invalid name.";
+	lem->err_t[ERR_NOPATH] = "No path found.";
+	lem->err_t[CERR_NOTUBE] = "Tubes are missing.";
+	lem->err_t[CERR_NOPATH] = "No path found.";
 }
 
-void	parse_err(t_env *lem, t_parser *pars, char **line, char err)
+void	parse_err(t_env *lem, t_parser *pars, char **line, int err)
 {
-	(void)err;
 	ft_printf("** PARSING ERROR **\n");
-	ft_printf("On line %d : %s\n", pars->ln, lem->err[5]);
-	ft_strdel(line);
+	ft_printf("On line %d : %s\n\n", pars->ln, lem->err_t[err]);
+	if (lem->args.pfile)
+		ft_strdel(line);
 	pars->err = 1;
-	return ;
+}
+
+void	warning(t_parser *pars, char *line, int w)
+{
+	ft_printf("** WARNING **\n");
+	if (w == WAR_RUNKN)
+		ft_printf("On line %d : %s doesn't exist.\n\n", pars->ln, line);
+	else if (w == WAR_CMDUNKN)
+		ft_printf("On line %d : %s is unknown.\n\n", pars->ln, line);
+}
+
+void	crit_err(t_env *lem, int err)
+{
+	ft_printf("** CRITICAL ERROR **\n");
+	ft_printf("%s\nQuitting.\n", lem->err_t[err]);
 }

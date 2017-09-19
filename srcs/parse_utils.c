@@ -15,15 +15,11 @@
 void	read_and_delete(char *line, ssize_t gnl_ret)
 {
 	if (!gnl_ret)
-	{
 		ft_strdel(&line);
-		return ;
-	}
-	while (get_next_line(0, &line))
+	else
 	{
-		if (!*line)
-			exit(0);
+		while (get_next_line(0, &line))
+			ft_strdel(&line);
 		ft_strdel(&line);
 	}
-	ft_strdel(&line);
 }

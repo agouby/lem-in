@@ -33,7 +33,7 @@ t_rlist		*rlist_newalloc(t_room *r)
 	t_rlist *new;
 
 	new = (t_rlist *)malloc(sizeof(t_rlist));
-	new->r = malloc(sizeof(t_room));
+	new->r = (t_room *)malloc(sizeof(t_room));
 	ft_memcpy(new->r, r, sizeof(t_room));
 	new->next = NULL;
 	return (new);
@@ -47,6 +47,7 @@ t_rlist		*del_last_queue(t_rlist **queue)
 	tmp = *queue;
 	if (!tmp->next)
 	{
+		free(*queue);
 		*queue = NULL;
 		return (NULL);
 	}

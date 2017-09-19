@@ -20,7 +20,7 @@ void	del_file(void *content, size_t size)
 
 void	push_in_file(t_env *lem, char *line)
 {
-	if (lem->args.pfile)
+	if (lem->args.pfile && line)
 		ft_lstadd(&lem->file, ft_lstnew_noalloc(line));
 	else
 		ft_strdel(&line);

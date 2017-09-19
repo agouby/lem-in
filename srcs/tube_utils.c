@@ -50,17 +50,19 @@ void	convert_tube(t_env *lem, t_parser *pars, char *line)
 	char	*cpy;
 	size_t	h;
 	size_t	h_sec;
+	char	w;
 
+	w = 0;
 	cpy = pars->slh;
 	*pars->slh = '\0';
 	pars->slh++;
 	h = get_hash_index(line);
 	h_sec = get_hash_index(pars->slh);
-	if (!r_exists(lem->hash[h], line))
-		ft_printf("Error tube : Room <%s> doesn't exist.\n", line);
-	else if (!r_exists(lem->hash[h_sec], pars->slh))
-		ft_printf("Error tube : Room <%s> doesn't exist.\n", pars->slh);
-	else
+	if (!r_exists(lem->hash[h], line) && (w = 1) && lem->args.w)
+		warning(pars, line, WAR_RUNKN);
+	if (!r_exists(lem->hash[h_sec], pars->slh) && (w = 1) && lem->args.w)
+		warning(pars, pars->slh, WAR_RUNKN);
+	if (!w)
 	{
 		push_t_in_r(lem, line, pars->slh, h, h_sec);
 		push_t_in_r(lem, pars->slh, line, h_sec, h);

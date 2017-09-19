@@ -28,25 +28,31 @@ static char	got_double_room(t_env *lem, const char *line, size_t hash)
 	return (0);
 }
 
-char		valid_room_name(const char *line)
+char		valid_room_name(const char *line, int *err)
 {
 	if (*line == ' ' || *line == 'L')
+	{
+		*err = ERR_RNAME;
 		return (0);
+	}
 	return (1);
 }
 
-char		valid_room_coords(const char *line)
+char		valid_room_coords(const char *line, int *err)
 {
 	while (*line)
 	{
 		if (!ft_isspace(*line) && !ft_isdigit(*line))
+		{
+			*err = ERR_COORD;
 			return (0);
+		}
 		line++;
 	}
 	return (1);
 }
 
-void get_room_infos(t_room **r, const char *line, char *slh)
+void		get_room_infos(t_room **r, const char *line, char *slh)
 {
 	*r = (t_room *)malloc(sizeof(t_room));
 	if (!((*r)->name = ft_strdup(line)))
@@ -56,6 +62,7 @@ void get_room_infos(t_room **r, const char *line, char *slh)
 	(*r)->al_vis = 0;
 	(*r)->score = -1;
 	(*r)->banned = 0;
+	(*r)->ant_id = 0;
 }
 
 void		create_room(t_env *lem, t_parser *pars, char *line)

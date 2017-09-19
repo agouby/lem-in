@@ -28,9 +28,14 @@ void	print_path(t_env *lem)
 	ft_printf("PRINTING PATH \n\n");
 	while (lem->paths)
 	{
-		ft_printf("%s", lem->paths->content);
-		if (lem->paths->next)
-			ft_printf(" - ");
+		while (lem->paths->lst)
+		{
+			ft_printf("%s", lem->paths->lst->r->name);
+			if (lem->paths->lst->next)
+				ft_printf(" - ");
+			lem->paths->lst = lem->paths->lst->next;
+		}
+		ft_printf("\n");
 		lem->paths = lem->paths->next;
 	}
 	ft_printf("\n\n");
@@ -62,7 +67,7 @@ void	write_nei_in_queue(t_env *lem, t_room *r)
 			nei_tmp->r->al_vis = 1;
 			if (ft_strequ(nei_tmp->r->name, lem->start->r->name))
 				lem->start_fnd = 1;
-			rlist_add(&lem->queue, rlist_newalloc(nei_tmp->r));
+			rlist_add(&lem->queue, rlist_new(nei_tmp->r));
 		}
 		nei_tmp = nei_tmp->next;
 	}
@@ -70,12 +75,15 @@ void	write_nei_in_queue(t_env *lem, t_room *r)
 
 void	del_queue(t_rlist **queue)
 {
+	t_rlist *tmp;
+
 	while (*queue)
 	{
-		free(*queue);
-		*queue = NULL;
+		tmp = *queue;
+		*queue = (*queue)->next;
+		free(tmp);
 	}
-	*queue = NULL;
+	queue = NULL;
 }
 
 void	score_map(t_env *lem)
@@ -91,6 +99,8 @@ void	score_map(t_env *lem)
 		cur = del_last_queue(&lem->queue);
 	}
 	del_queue(&lem->queue);
+
+
 }
 
 void		init_al_vis(t_rlist **hash)
@@ -143,16 +153,19 @@ t_rlist 	*get_next_room(t_env *lem, t_room *cur)
 void	rebuild_path(t_env *lem)
 {
 	t_rlist *cur;
+	t_rlist	*new;
 
+	new = NULL;
 	cur = lem->start;
 	lem->end->r->score = 0;
-	ft_lstadd(&lem->paths, ft_lstnew_noalloc(cur->r->name));
+	path_add(&lem->paths, path_new(new));
+	lem->paths->lst = NULL;
+	rlist_add(&lem->paths->lst, rlist_new(cur->r));
 	while (cur->r != lem->end->r)
 	{
 		cur = get_next_room(lem, cur->r);
-		ft_lstadd(&lem->paths, ft_lstnew_noalloc(cur->r->name));
+		rlist_add(&lem->paths->lst, rlist_new(cur->r));
 	}
-	print_path(lem);
 }
 
 unsigned char is_in_list(t_rlist *list, char *str)
@@ -188,22 +201,26 @@ void	check_direct_map(t_env *lem)
 
 void	get_paths(t_env *lem)
 {
+	unsigned int	max_path;
 
-//	max_path = get_start_nei(lem->start);
+	max_path = get_start_nei(lem->start);
+	if (lem->args.max_path && (lem->args.max_path < max_path))
+		max_path = lem->args.max_path;
 	check_direct_map(lem);
 	if (lem->direct)
 		return ;
-	while (1)
+	while (max_path)
 	{
 		lem->start_fnd = 0;
 		score_map(lem);
 		if (!lem->start_fnd)
-		{
-			ft_printf("END OF PATHS\n");
-			return ;
-		}
-//		max_path--;
+			break ;
+		max_path--;
 		rebuild_path(lem);
 		init_al_vis(lem->hash);
 	}
+	if (!lem->paths)
+		quit_path(lem);
+	lem->paths = path_rev(lem->paths);
+//	print_path(lem);
 }

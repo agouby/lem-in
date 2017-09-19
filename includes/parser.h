@@ -13,6 +13,8 @@
 #ifndef PARSER_H
 # define PARSER_H
 
+# include "msg.h"
+
 typedef struct	s_parser
 {
 	char			*slh;

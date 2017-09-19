@@ -18,9 +18,9 @@ int		main(int ac, const char **av)
 
 	(void)ac;
 	ft_memset(&lem, 0, sizeof(lem));
-	init_err_tab(&lem);
 	get_args(&lem, av);
 	parse_map(&lem);
-//	get_paths(&lem);
+	get_paths(&lem);
+	travel_ants(&lem);
 	return (0);
 }

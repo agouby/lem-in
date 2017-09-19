@@ -15,7 +15,7 @@
 size_t	get_hash_index(const char *str)
 {
 	unsigned long	hash;
-	int				c;
+	int		c;
 
 	hash = 5381;
 	while ((c = *str++))

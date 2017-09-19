@@ -11,8 +11,8 @@
 # **************************************************************************** #
 
 COMP_LIB = n
-CC = gcc
-CHELP = -g -fsanitize=address
+CC = gcc -g
+CHELP = -g
 CFLA = -Wall -Werror -Wextra  
 NAME = lem-in
 INC = -I./includes
@@ -27,7 +27,7 @@ $(NAME): $(OBJ)
 ifeq ($(COMP_LIB), y)
 	@make -C libft
 endif
-	@$(CC) $(CFLA) -o $(NAME) $(OBJ) $(LIB_PATH)
+	@$(CC) $(CFLA) $(CHELP) -o $(NAME) $(OBJ) $(LIB_PATH)
 
 %.o: %.c
 	@printf "\rCompiling $<"
