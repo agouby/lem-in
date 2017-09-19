@@ -38,25 +38,40 @@ void	go_throught_paths(t_env *lem)
 				print = 1;
 			}
 			if (print)
-			{
 				ft_printf("L%d-%s ", lst_tmp->r->ant_id, lst_tmp->r->name);
-			}
 			lst_tmp = lst_tmp->next;
 		}
+		ft_printf("\n");
 		paths_tmp = paths_tmp->next;
 	}
 }
 
-void	travel_ants(t_env *lem)
+void	travel_multipath(t_env *lem)
 {
-
-	int i = 0;
-
 	lem->start->r->has_ant = lem->ants_nb;
 	while (lem->end->r->has_ant != lem->ants_nb)
-	{
 		go_throught_paths(lem);
-		ft_printf("\n");
+}
+
+void	travel_direct(t_env *lem)
+{
+	size_t	i;
+	
+	i = 1;
+	while (i <= lem->ants_nb)
+	{
+		ft_printf("L%d-%s", i, lem->end->r->name);
+		if (i != lem->ants_nb)
+			ft_printf(" ");
 		i++;
 	}
+	ft_printf("\n");
+}
+
+void	travel_ants(t_env *lem)
+{
+	if (lem->direct)
+		travel_direct(lem);
+	else
+		travel_multipath(lem);
 }
