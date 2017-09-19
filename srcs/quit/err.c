@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 22:42:14 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/19 22:42:15 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/20 00:09:21 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	warning(t_parser *pars, char *line, int w)
 		ft_printf("On line %d : %s doesn't exist.\n\n", pars->ln, line);
 	else if (w == WAR_CMDUNKN)
 		ft_printf("On line %d : %s is unknown.\n\n", pars->ln, line);
+	else if (w == WAR_RLONELY)
+		ft_printf("Room <%s> is not connected to anything.\n\n", line);
 }
 
 void	crit_err(t_env *lem, int err)

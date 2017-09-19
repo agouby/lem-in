@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 22:23:26 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/19 22:23:32 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/20 00:10:39 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,12 @@
 # define ERR_TNAME		5
 # define ERR_NOPATH		6
 
-# define CERR_NOTUBE		7
-# define CERR_NOPATH		8
+# define CERR_NOTUBE	7
+# define CERR_NOPATH	8
 
 # define WAR_RUNKN		1
 # define WAR_RLONE		2
-# define WAR_CMDUNKN		3
+# define WAR_CMDUNKN	3
+# define WAR_RLONELY	4
 
 #endif

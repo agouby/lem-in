@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 13:20:42 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/11 21:56:58 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/19 23:55:11 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ int		main(int ac, const char **av)
 	ft_memset(&lem, 0, sizeof(lem));
 	get_args(&lem, av);
 	parse_map(&lem);
+	check_lonely_rooms(lem);
 	get_paths(&lem);
+	print_args(lem);
 	travel_ants(&lem);
 	return (0);
 }

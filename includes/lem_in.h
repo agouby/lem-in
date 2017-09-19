@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 13:14:55 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/19 23:22:15 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/20 00:11:17 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void			get_tube(t_env *lem, t_parser *pars, char *line);
 void			parse_err(t_env *lem, t_parser *pars, char **line, int err);
 void			command_unknown(const char *line);
 void			read_and_delete(char *line, ssize_t gnl_ret);
-void			print_hash(t_env *lem);
+void			print_hash(t_env lem);
 size_t			get_hash_index(const char *str);
 void			ants_err(char **line, ssize_t gnl_ret);
 t_rlist			*rlist_new(t_room *r);
@@ -117,5 +117,8 @@ void			init_al_vis(t_rlist **hash);
 t_rlist 		*get_next_room(t_env *lem, t_room *cur);
 unsigned char 	is_in_list(t_rlist *list, char *str);
 size_t			get_start_nei(t_rlist *start);
+void			print_args(t_env lem);
+void			print_paths(t_env lem);
+void			check_lonely_rooms(t_env lem);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 22:44:10 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/19 23:14:17 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/19 23:43:05 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	travel_direct(t_env *lem)
 
 void	travel_ants(t_env *lem)
 {
+	ft_printf("SOLUTION\n\n");
 	if (lem->direct)
 		travel_direct(lem);
 	else

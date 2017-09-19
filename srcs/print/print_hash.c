@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 22:32:43 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/19 22:33:27 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/19 23:57:47 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	coll(t_rlist *tmp)
 	}
 }
 
-void	print_hash(t_env *lem)
+void	print_hash(t_env lem)
 {
 	size_t	i;
 	t_rlist *tmp;
@@ -43,9 +43,9 @@ void	print_hash(t_env *lem)
 	ft_printf("** PRINTING HASH **\n\n");
 	while (i < H_SIZE)
 	{
-		if (lem->hash[i])
+		if (lem.hash[i])
 		{
-			tmp = lem->hash[i];
+			tmp = lem.hash[i];
 			coll(tmp);
 		}
 		i++;
