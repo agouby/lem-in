@@ -63,6 +63,7 @@ void		get_room_infos(t_room **r, const char *line, char *slh)
 	(*r)->score = -1;
 	(*r)->banned = 0;
 	(*r)->ant_id = 0;
+	(*r)->has_ant = 0;
 }
 
 void		create_room(t_env *lem, t_parser *pars, char *line)

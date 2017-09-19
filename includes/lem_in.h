@@ -27,6 +27,7 @@ typedef struct	s_room
 	unsigned char	banned;
 	struct s_rlist	*nei;
 	size_t			ant_id;
+	size_t			has_ant;
 	size_t			x;
 	size_t			y;
 }				t_room;
