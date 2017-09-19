@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 10:28:48 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/07 12:43:08 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/19 22:26:58 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 size_t	get_hash_index(const char *str)
 {
 	unsigned long	hash;
-	int		c;
+	int				c;
 
 	hash = 5381;
 	while ((c = *str++))

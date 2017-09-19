@@ -1,9 +1,16 @@
-#include "lem_in.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   args.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/19 22:25:55 by agouby            #+#    #+#             */
+/*   Updated: 2017/09/19 22:26:40 by agouby           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	usage_err()
-{
-	ft_print_error("Error usage");	
-}
+#include "lem_in.h"
 
 void	get_args(t_env *lem, const char **av)
 {
@@ -21,13 +28,7 @@ void	get_args(t_env *lem, const char **av)
 		else if (ft_strnequ("-maxpath=", *av, 9))
 			lem->args.max_path = ft_atou(*av + 9);
 		else
-			usage_err();
-	av++;
+			ft_print_error("Error usage");
+		av++;
 	}
-/*	ft_printf("PINF = %d\n", lem->args.pinf);
-	ft_printf("PPATH = %d\n", lem->args.ppath);
-	ft_printf("PFILE = %d\n", lem->args.pfile);
-	ft_printf("MAX_PATH = %d\n", lem->args.max_path);
-*/
 }
-

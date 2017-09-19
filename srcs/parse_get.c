@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 16:25:35 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/09 16:55:52 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/19 22:43:59 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	get_ants(t_env *lem, t_parser *pars, ssize_t *gnl_ret)
 
 	line = NULL;
 	*gnl_ret = get_next_line(0, &line);
-	pars->ln++;	
+	pars->ln++;
 	if (ft_strisdigit(line) && (lem->ants_nb = ft_atou(line)) > 0)
 		push_in_file(lem, line);
 	else

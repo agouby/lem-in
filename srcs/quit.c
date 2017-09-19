@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msg.h                                              :+:      :+:    :+:   */
+/*   quit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/19 22:23:26 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/19 22:23:32 by agouby           ###   ########.fr       */
+/*   Created: 2017/09/19 22:37:23 by agouby            #+#    #+#             */
+/*   Updated: 2017/09/19 22:38:26 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MSG_H
-# define MSG_H
+#include "lem_in.h"
 
-# define NB_ERR			8
+void	quit_parsing(t_env *lem)
+{
+	crit_err(lem, CERR_NOTUBE);
+	del_hash(lem->hash);
+	exit(1);
+}
 
-# define ERR_ANTS		0
-# define ERR_RNAME		1
-# define ERR_COORD		2
-# define ERR_LINE		3
-# define ERR_CMD		4
-# define ERR_TNAME		5
-# define ERR_NOPATH		6
-
-# define CERR_NOTUBE		7
-# define CERR_NOPATH		8
-
-# define WAR_RUNKN		1
-# define WAR_RLONE		2
-# define WAR_CMDUNKN		3
-
-#endif
+void	quit_path(t_env *lem)
+{
+	crit_err(lem, CERR_NOPATH);
+	del_hash(lem->hash);
+	exit(1);
+}

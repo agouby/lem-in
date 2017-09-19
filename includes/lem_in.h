@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 13:14:55 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/11 21:56:43 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/19 23:22:15 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 typedef struct	s_room
 {
 	char			*name;
-	int 			al_vis;
+	int				al_vis;
 	ssize_t			score;
 	unsigned char	banned;
 	struct s_rlist	*nei;
@@ -40,9 +40,9 @@ typedef struct	s_rlist
 
 typedef struct	s_path
 {
-	t_rlist 	*lst;
+	t_rlist			*lst;
 	struct s_path	*next;
-}		t_path;
+}				t_path;
 
 typedef struct	s_args
 {
@@ -50,7 +50,7 @@ typedef struct	s_args
 	unsigned char	pfile;
 	unsigned char	ppath;
 	unsigned char	w;
-	size_t		max_path;
+	size_t			max_path;
 }				t_args;
 
 typedef struct	s_env
@@ -107,5 +107,15 @@ t_path			*path_new(t_rlist *lst);
 t_path			*path_rev(t_path *path);
 void			quit_path(t_env *lem);
 void			travel_ants(t_env *lem);
+char			next_is_start(t_env *le, t_rlist *l, char *pri, size_t *id_box);
+void			cur_is_end(t_rlist *lst_tmp, char *pri);
+void			next_is_basic(t_rlist *lst_tmp, char *pri);
+int				alrdy_in_queue(char *name, t_rlist *queue);
+void			write_nei_in_queue(t_env *lem, t_room *r);
+void			del_queue(t_rlist **queue);
+void			init_al_vis(t_rlist **hash);
+t_rlist 		*get_next_room(t_env *lem, t_room *cur);
+unsigned char 	is_in_list(t_rlist *list, char *str);
+size_t			get_start_nei(t_rlist *start);
 
 #endif
