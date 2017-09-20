@@ -6,11 +6,23 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 22:25:55 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/20 00:05:35 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/20 14:57:53 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+void	err_usage(void)
+{
+	ft_printf("Usage : ./lem-in [OPTIONS] < [MAP]\n\n");
+	ft_printf("List of options that are available :\n\n");
+	ft_printf("-v : Start visualizer with \"; ./visual.fx\".\n");
+	ft_printf("-w : Check for warnings\n-nopfile : Don't print the file.\n");
+	ft_printf("-pinf  : Print infos about the rooms and their connexions.\n");
+	ft_printf("-ppath : Print found paths.\n");
+	ft_printf("-maxpath=[N] : Specify N to get the maximum paths available.\n");
+	exit(1);
+}
 
 void	check_lonely_rooms(t_env lem)
 {
@@ -40,6 +52,7 @@ void	check_lonely_rooms(t_env lem)
 
 void	get_args(t_env *lem, const char **av)
 {
+	lem->args.v_fd = open("visual_infos", O_RDWR | O_CREAT, 0666);
 	av++;
 	while (*av)
 	{
@@ -49,22 +62,26 @@ void	get_args(t_env *lem, const char **av)
 			lem->args.pinf = 1;
 		else if (ft_strequ("-ppath", *av))
 			lem->args.ppath = 1;
-		else if (ft_strequ("-pfile", *av))
-			lem->args.pfile = 1;
+		else if (ft_strequ("-nopfile", *av))
+			lem->args.nopfile = 1;
 		else if (ft_strnequ("-maxpath=", *av, 9))
 			lem->args.max_path = ft_atou(*av + 9);
+		else if (ft_strequ("-v", *av))
+			lem->args.v = 1;
 		else
-			ft_print_error("Error usage");
+			err_usage();
 		av++;
 	}
 }
 
 void	print_args(t_env lem)
 {
-	if (lem.args.pfile)
+	if (!lem.args.nopfile)
 		print_file(lem);
 	if (lem.args.pinf)
 		print_hash(lem);
 	if (lem.args.ppath)
 		print_paths(lem);
+	if (lem.args.v)
+		print_visual_infos(lem);
 }

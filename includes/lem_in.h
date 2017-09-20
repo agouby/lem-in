@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 13:14:55 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/20 10:24:49 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/20 14:49:15 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 
 # include "ft_printf.h"
 # include "parser.h"
+# include <fcntl.h>
 
-# define H_SIZE		100
+# define H_SIZE		1000000
 # define MAX_PATH	1000000
 
 typedef struct	s_room
@@ -47,9 +48,11 @@ typedef struct	s_path
 typedef struct	s_args
 {
 	unsigned char	pinf;
-	unsigned char	pfile;
+	unsigned char	nopfile;
 	unsigned char	ppath;
 	unsigned char	w;
+	unsigned char	v;
+	int				v_fd;
 	size_t			max_path;
 }				t_args;
 
@@ -123,5 +126,6 @@ void			check_lonely_rooms(t_env lem);
 void			del_paths(t_path *paths);
 char			valid_room_name(const char *line, int *err);
 char			valid_room_coords(const char *line, int *err);
+void			print_visual_infos(t_env lem);
 
 #endif

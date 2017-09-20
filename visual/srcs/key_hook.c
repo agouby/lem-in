@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstrev.c                                        :+:      :+:    :+:   */
+/*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/14 00:03:01 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/20 11:28:15 by agouby           ###   ########.fr       */
+/*   Created: 2017/09/20 16:44:17 by agouby            #+#    #+#             */
+/*   Updated: 2017/09/20 16:48:16 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "visual.h"
 
-t_list	*ft_lstrev(t_list *lst)
+int		key_hook(int key)
 {
-	t_list	*new;
-	t_list	*elem;
-
-	new = NULL;
-	while (lst)
-	{
-		elem = lst;
-		lst = lst->next;
-		elem->next = new;
-		new = elem;
-	}
-	return (new);
+	if (key == K_ESC)
+		exit(0);
+	return (0);
 }

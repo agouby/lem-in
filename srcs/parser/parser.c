@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 22:46:05 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/20 10:15:19 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/20 14:38:08 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	parse_map(t_env *lem)
 	line = NULL;
 	gnl_ret = 0;
 	get_ants(lem, &pars, &gnl_ret);
-	lem->hash = ft_memalloc((H_SIZE) * sizeof(t_list *));
+	if (!(lem->hash = ft_memalloc((H_SIZE) * sizeof(t_list *))))
+		ft_memerr();
 	while (!pars.err && (gnl_ret = get_next_line(0, &line)))
 		parsing_process(lem, &pars, line);
 	read_and_delete(line, gnl_ret);

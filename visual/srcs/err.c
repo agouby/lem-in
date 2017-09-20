@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstrev.c                                        :+:      :+:    :+:   */
+/*   err.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/14 00:03:01 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/20 11:28:15 by agouby           ###   ########.fr       */
+/*   Created: 2017/09/20 14:49:46 by agouby            #+#    #+#             */
+/*   Updated: 2017/09/20 17:47:22 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "visual.h"
 
-t_list	*ft_lstrev(t_list *lst)
+void	check_for_error(t_env *v, char *line)
 {
-	t_list	*new;
-	t_list	*elem;
-
-	new = NULL;
-	while (lst)
+	if (ft_strequ(line, "NOVIS"))
 	{
-		elem = lst;
-		lst = lst->next;
-		elem->next = new;
-		new = elem;
+		ft_strdel(&line);
+		exit(0);
 	}
-	return (new);
+	if (ft_strequ(line, "ERROR"))
+		v->err = 1;
+}
+
+void	print_err(t_env *v)
+{
+	mlx_string_put(v->mlx.ptr, v->mlx.win, WIDTH / 2, HEIGHT / 2, 0xFFFFFF, "ERROR.");
 }

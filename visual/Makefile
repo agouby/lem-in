@@ -5,48 +5,38 @@
 #                                                     +:+ +:+         +:+      #
 #    By: agouby <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/05/09 13:13:02 by agouby            #+#    #+#              #
-#    Updated: 2017/09/20 14:26:35 by agouby           ###   ########.fr        #
+#    Created: 2017/09/20 12:30:24 by agouby            #+#    #+#              #
+#    Updated: 2017/09/20 16:15:05 by agouby           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-COMP_LIB = n
-NAME = lem-in
+NAME = ../visual.fx
 CC = gcc
-CFLA = -Wall -Werror -Wextra
+FLA = -Wall -Werror -Wextra
 INC = -I./includes
-INC_LIB = -I./libft/includes
-LIB_PATH = -L./libft -lftprintf
+INC_LIB = -I../libft/includes
+INC_MLX = -I./minilibx_macos
+LIB_MLX = -L./minilibx_macos -lmlx
+MLX_FLA = -framework OpenGL -framework AppKit
+LIB_PATH = -L../libft -lftprintf
 SRC = $(shell find ./srcs | grep "\.c$$")
-SRC_V = $(shell find ./visual | grep "\.c$$")
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(SRC_V)
-ifeq ($(COMP_LIB), y)
-	@make -C libft
-endif
-	@make -C visual
-	@$(CC) $(CFLA) -o $(NAME) $(OBJ) $(LIB_PATH)
+$(NAME): $(OBJ)
+	@$(CC) $(FLA) -o $(NAME) $(OBJ) $(LIB_PATH) $(INC_MLX) $(LIB_MLX) $(MLX_FLA)
 
 %.o: %.c
-	@printf "\rCompiling $<"
-	@$(CC) $(CFLA) $(INC) $(INC_LIB) -c $< -o $@
+	@$(CC) $(FLA) $(INC) $(INC_LIB) -c $< -o $@
 
 clean:
-ifeq ($(COMP_LIB), y)
-	@make clean -C libft
-endif
-	@make clean -C visual
+	@/bin/rm -f minilibx_macos/*.o
 	@/bin/rm -f $(OBJ)
-fclean: clean
-ifeq ($(COMP_LIB), y)
-	@make fclean -C libft
-endif
-	@make fclean -C visual
-	@/bin/rm -f $(NAME)
 
-re: fclean all
+fclean: clean
+	@/bin/rm -f minilibx_macos/libmlx.a
+	@/bin/rm -f $(NAME)
+re : fclean all
 
 .PHONY: all clean fclean re

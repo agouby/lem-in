@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 22:44:10 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/19 23:43:05 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/20 14:03:18 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,12 @@ void	go_throught_paths(t_env *lem)
 			pri = 0;
 			check_for_case(lem, lst_tmp, &pri, &id_box);
 			if (pri)
+			{
+				if (lem->args.v)
+					ft_dprintf(lem->args.v_fd, "L%d-%s ",
+							lst_tmp->r->ant_id, lst_tmp->r->name);
 				ft_printf("L%d-%s ", lst_tmp->r->ant_id, lst_tmp->r->name);
+			}
 			lst_tmp = lst_tmp->next;
 		}
 		paths_tmp = paths_tmp->next;
@@ -57,6 +62,8 @@ void	travel_multipath(t_env *lem)
 	while (lem->end->r->has_ant != lem->ants_nb)
 	{
 		go_throught_paths(lem);
+		if (lem->args.v)
+			ft_dprintf(lem->args.v_fd, "\n");
 		ft_printf("\n");
 	}
 }
@@ -69,6 +76,8 @@ void	travel_direct(t_env *lem)
 	while (i <= lem->ants_nb)
 	{
 		ft_printf("L%d-%s", i, lem->end->r->name);
+		if (lem->args.v)
+			ft_dprintf(lem->args.v_fd, "L%d-%s", i, lem->end->r->name);
 		if (i != lem->ants_nb)
 			ft_printf(" ");
 		i++;
@@ -78,7 +87,9 @@ void	travel_direct(t_env *lem)
 
 void	travel_ants(t_env *lem)
 {
-	ft_printf("SOLUTION\n\n");
+	ft_printf("SOLUTION :\n\n");
+	if (lem->args.v)
+		ft_dprintf(lem->args.v_fd, "SOLUTION\n");
 	if (lem->direct)
 		travel_direct(lem);
 	else

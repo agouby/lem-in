@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstrev.c                                        :+:      :+:    :+:   */
+/*   visual.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/14 00:03:01 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/20 11:28:15 by agouby           ###   ########.fr       */
+/*   Created: 2017/09/20 11:14:54 by agouby            #+#    #+#             */
+/*   Updated: 2017/09/20 22:12:14 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "visual.h"
 
-t_list	*ft_lstrev(t_list *lst)
+int		main(void)
 {
-	t_list	*new;
-	t_list	*elem;
+	t_env	v;
 
-	new = NULL;
-	while (lst)
-	{
-		elem = lst;
-		lst = lst->next;
-		elem->next = new;
-		new = elem;
-	}
-	return (new);
+	ft_memset(&v, 0, sizeof(t_env));
+	v.fd = open("visual_infos", O_RDONLY);
+	if (v.fd == -1)
+		ft_print_error("File not found.\n");
+	read_file(&v);
+	if (v.err)
+		print_err(&v);
+	else
+		print_map(&v);
+	mlx_hook(v.mlx.win, 2, 3, key_hook, &v);
+	mlx_loop(v.mlx.ptr);
+	return (0);
 }

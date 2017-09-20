@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 11:54:49 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/19 23:53:24 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/20 14:09:52 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,11 @@ void	get_paths(t_env *lem)
 	if (lem->args.max_path && (lem->args.max_path < max_path))
 		max_path = lem->args.max_path;
 	if ((lem->direct = is_in_list(lem->start->r->nei, lem->end->r->name)))
+	{
+		if (lem->args.v)
+			ft_dprintf(lem->args.v_fd, "DIRECT\n");
 		return ;
+	}
 	while (max_path)
 	{
 		lem->start_fnd = 0;
