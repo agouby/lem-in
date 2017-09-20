@@ -83,4 +83,6 @@ void	travel_ants(t_env *lem)
 		travel_direct(lem);
 	else
 		travel_multipath(lem);
+	del_hash(lem->hash);
+	del_paths(lem->paths);
 }

@@ -45,3 +45,23 @@ void	del_hash(t_rlist **hash)
 	}
 	free(hash);
 }
+
+void	del_paths(t_path *paths)
+{
+	t_path	*tmp_path;
+	t_rlist	*tmp_lst;
+
+	while (paths)
+	{
+		tmp_path = paths->next;
+		while (paths->lst)
+		{
+			tmp_lst = paths->lst->next;
+			free(paths->lst);
+			paths->lst = tmp_lst;
+
+		}
+		free(paths);
+		paths = tmp_path;
+	}
+}

@@ -23,14 +23,14 @@ void	init_err_tab(t_env *lem)
 	lem->err_t[ERR_NOPATH] = "No path found.";
 	lem->err_t[CERR_NOTUBE] = "Tubes are missing.";
 	lem->err_t[CERR_NOPATH] = "No path found.";
+	lem->err_t[CERR_DUPR] = "Duplicated start or end.";
 }
 
 void	parse_err(t_env *lem, t_parser *pars, char **line, int err)
 {
 	ft_printf("** PARSING ERROR **\n");
 	ft_printf("On line %d : %s\n\n", pars->ln, lem->err_t[err]);
-	if (lem->args.pfile)
-		ft_strdel(line);
+	ft_strdel(line);
 	pars->err = 1;
 }
 
@@ -41,6 +41,8 @@ void	warning(t_parser *pars, char *line, int w)
 		ft_printf("On line %d : %s doesn't exist.\n\n", pars->ln, line);
 	else if (w == WAR_CMDUNKN)
 		ft_printf("On line %d : %s is unknown.\n\n", pars->ln, line);
+	else if (w == WAR_ALEXIST)
+		ft_printf("On line %d : %s already exist\n\n", pars->ln, line);
 	else if (w == WAR_RLONELY)
 		ft_printf("Room <%s> is not connected to anything.\n\n", line);
 }

@@ -120,5 +120,6 @@ size_t			get_start_nei(t_rlist *start);
 void			print_args(t_env lem);
 void			print_paths(t_env lem);
 void			check_lonely_rooms(t_env lem);
+void			del_paths(t_path *paths);
 
 #endif

@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 COMP_LIB = n
-CC = gcc
+CC = gcc -g
 CFLA = -Wall -Werror -Wextra  
 NAME = lem-in
 INC = -I./includes

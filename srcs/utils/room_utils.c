@@ -77,7 +77,19 @@ void		create_room(t_env *lem, t_parser *pars, char *line)
 	pars->slh++;
 	hash = get_hash_index(line);
 	if (got_double_room(lem, line, hash))
+	{
+		if (pars->got_end || pars->got_start)
+		{
+			crit_err(lem, CERR_DUPR);
+			read_and_delete(line, 1);
+			del_hash(lem->hash);
+			ft_strdel(&line);
+			exit(1);
+		}
+		else
+			warning(pars, line, WAR_ALEXIST);
 		*cpy = ' ';
+	}
 	else
 	{
 		get_room_infos(&r, line, pars->slh);

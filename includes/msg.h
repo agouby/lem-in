@@ -24,11 +24,13 @@
 # define ERR_NOPATH		6
 
 # define CERR_NOTUBE	7
-# define CERR_NOPATH	8
+# define CERR_DUPR	8
+# define CERR_NOPATH	9
 
 # define WAR_RUNKN		1
 # define WAR_RLONE		2
 # define WAR_CMDUNKN	3
 # define WAR_RLONELY	4
+# define WAR_ALEXIST	5
 
 #endif
