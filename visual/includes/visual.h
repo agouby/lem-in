@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 11:15:44 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/20 23:17:36 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/21 00:36:51 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,10 @@ void			get_solution(t_env *v, char *line);
 t_rlist			*rlist_newalloc(t_room *r);
 t_rlist			*rlist_new(t_room *r);
 void			rlist_add(t_rlist **old, t_rlist *n);
+void			rlist_addb(t_rlist **old, t_rlist *n);
 void			draw_point(t_env *v, t_coord p, int color);
 t_bres			draw_line_set(t_coord p1, t_coord p2);
 void			draw_line(t_env *v, t_coord p1, t_coord p2);
-char			*get_room(t_env *v, char *line, char ser);
+char			*get_room(t_env *v, char *line, t_room **r, size_t ser);
 
 #endif

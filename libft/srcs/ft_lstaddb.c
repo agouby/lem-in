@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 14:58:45 by agouby            #+#    #+#             */
-/*   Updated: 2017/03/26 15:01:38 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/21 00:13:34 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,4 @@ void	ft_lstaddb(t_list **alst, t_list *new)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
-	return ;
 }

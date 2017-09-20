@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 14:19:06 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/21 00:04:15 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/21 00:39:52 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ void	read_file(t_env *v)
 {
 	char	*line;
 	char	*tmp;
-	char	*prev;
-	char	ser;
+	t_room	*prev;
+	size_t	ser;
+	t_room *r;
 
 	line = NULL;
+	r = NULL;
 	ser = 0;
 	ft_printf("PRINT OF VISUALIZER\n");
 	v->mlx.ptr = mlx_init();
@@ -50,14 +52,25 @@ void	read_file(t_env *v)
 			tmp = line;
 			if (ser > 1)
 				ft_printf("[%s - ]", v->s->name);
+			prev = v->s;
 			while (tmp)
 			{
-				prev = tmp;
-				tmp = get_room(v, tmp, ser++);
+				tmp = get_room(v, tmp, &r, ser++);
+				ft_printf("FUCK = %s\n", r->name);
+				rlist_addb(&v->list, rlist_new(r));
 				if (ser > 2)
+				{
+//					draw_line(v, prev->c, v->list->r->c);
+					prev = v->list->r;
+				}
+				if (ser > 2)
+				{
 					ft_printf("%s - ", v->list->r->name);
+				}
+				v->list = v->list->next;
 //				draw_line();
 			}
+//			draw_line(v, v->list->r->c, v->e->c);
 			if (ser > 2)
 				ft_printf("{%s - }\n", v->e->name);
 		}

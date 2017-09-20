@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 11:11:58 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/20 23:30:27 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/21 00:40:35 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	print_paths(t_env lem)
 	tmp = lem.paths;
 	while (tmp)
 	{
-		lst_rev(&tmp->lst);
+//		lst_rev(&tmp->lst);
 		tmp_lst = tmp->lst;
 		i = 0;
 		while (tmp_lst)

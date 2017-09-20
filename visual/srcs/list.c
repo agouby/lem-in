@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 17:24:32 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/20 23:14:53 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/21 00:15:22 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,19 @@ t_rlist		*rlist_new(t_room *r)
 	new->r = r;
 	new->next = NULL;
 	return (new);
+}
+
+void	rlist_addb(t_rlist **old, t_rlist *new)
+{
+	t_rlist *tmp;
+
+	if (*old == NULL)
+	{
+		*old = new;
+		return ;
+	}
+	tmp = *old;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new;
 }
