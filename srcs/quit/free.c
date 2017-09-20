@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 22:34:11 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/19 22:42:10 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/20 10:03:30 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	del_paths(t_path *paths)
 			tmp_lst = paths->lst->next;
 			free(paths->lst);
 			paths->lst = tmp_lst;
-
 		}
 		free(paths);
 		paths = tmp_path;

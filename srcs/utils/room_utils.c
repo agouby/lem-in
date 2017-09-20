@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 17:24:02 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/19 23:58:59 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/20 10:24:12 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,18 @@ static char	got_double_room(t_env *lem, const char *line, size_t hash)
 	return (0);
 }
 
-char		valid_room_name(const char *line, int *err)
+void		deal_with_double(t_env *lem, t_parser *pars, char *line)
 {
-	if (*line == ' ' || *line == 'L')
+	if (pars->got_end || pars->got_start)
 	{
-		*err = ERR_RNAME;
-		return (0);
+		crit_err(lem, CERR_DUPR);
+		read_and_delete(line, 1);
+		del_hash(lem->hash);
+		ft_strdel(&line);
+		exit(1);
 	}
-	return (1);
-}
-
-char		valid_room_coords(const char *line, int *err)
-{
-	while (*line)
-	{
-		if (!ft_isspace(*line) && !ft_isdigit(*line))
-		{
-			*err = ERR_COORD;
-			return (0);
-		}
-		line++;
-	}
-	return (1);
+	else
+		warning(pars, line, WAR_ALEXIST);
 }
 
 void		get_room_infos(t_room **r, const char *line, char *slh)
@@ -78,16 +68,7 @@ void		create_room(t_env *lem, t_parser *pars, char *line)
 	hash = get_hash_index(line);
 	if (got_double_room(lem, line, hash))
 	{
-		if (pars->got_end || pars->got_start)
-		{
-			crit_err(lem, CERR_DUPR);
-			read_and_delete(line, 1);
-			del_hash(lem->hash);
-			ft_strdel(&line);
-			exit(1);
-		}
-		else
-			warning(pars, line, WAR_ALEXIST);
+		deal_with_double(lem, pars, line);
 		*cpy = ' ';
 	}
 	else

@@ -6,14 +6,14 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 22:23:26 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/20 00:10:39 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/20 09:58:38 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MSG_H
 # define MSG_H
 
-# define NB_ERR			8
+# define NB_ERR			9
 
 # define ERR_ANTS		0
 # define ERR_RNAME		1
@@ -24,7 +24,7 @@
 # define ERR_NOPATH		6
 
 # define CERR_NOTUBE	7
-# define CERR_DUPR	8
+# define CERR_DUPR		8
 # define CERR_NOPATH	9
 
 # define WAR_RUNKN		1

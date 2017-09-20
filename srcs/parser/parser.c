@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 22:46:05 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/19 22:52:39 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/20 10:15:19 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ void	parsing_process(t_env *lem, t_parser *pars, char *line)
 	else if (!pars->got_tube && is_room(pars, line))
 		get_room(lem, pars, line);
 	else if (is_tube(pars, line))
+	{
 		get_tube(lem, pars, line);
+	}
 	else
 		parse_err(lem, pars, &line, ERR_LINE);
 	push_in_file(lem, line);

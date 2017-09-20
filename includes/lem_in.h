@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 13:14:55 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/20 00:11:17 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/20 10:24:49 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "ft_printf.h"
 # include "parser.h"
 
-# define H_SIZE		1000000
+# define H_SIZE		100
 # define MAX_PATH	1000000
 
 typedef struct	s_room
@@ -114,12 +114,14 @@ int				alrdy_in_queue(char *name, t_rlist *queue);
 void			write_nei_in_queue(t_env *lem, t_room *r);
 void			del_queue(t_rlist **queue);
 void			init_al_vis(t_rlist **hash);
-t_rlist 		*get_next_room(t_env *lem, t_room *cur);
-unsigned char 	is_in_list(t_rlist *list, char *str);
+t_rlist			*get_next_room(t_env *lem, t_room *cur);
+unsigned char	is_in_list(t_rlist *list, char *str);
 size_t			get_start_nei(t_rlist *start);
 void			print_args(t_env lem);
 void			print_paths(t_env lem);
 void			check_lonely_rooms(t_env lem);
 void			del_paths(t_path *paths);
+char			valid_room_name(const char *line, int *err);
+char			valid_room_coords(const char *line, int *err);
 
 #endif

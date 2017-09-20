@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 18:03:27 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/07 13:00:15 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/20 10:12:50 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ typedef struct	s_split
 
 typedef struct	s_coord
 {
-	int	x;
-	int y;
+	size_t	x;
+	size_t y;
 }				t_coord;
 
 char			*ft_strnjoin_del_1(char *s1, char *s2, int s, int e);
