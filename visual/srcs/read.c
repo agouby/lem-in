@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 14:19:06 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/21 16:26:55 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/21 21:22:04 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,31 +24,32 @@ void	print_list(t_rlist *list)
 	}
 }
 
+void	print_file(t_list *file)
+{
+	t_list	*tmp;
+
+	tmp = file;
+	ft_printf("\nPRINTING FILE :\n\n");
+	while (tmp)
+	{
+		ft_printf("%s\n", tmp->content);
+		tmp = tmp->next;
+	}
+}
+
+void	del_file(void *content, size_t size)
+{
+	(void)size;
+	ft_strdel((char **)&content);
+}
+
 void	read_file(t_env *v)
 {
 	char	*line;
 
 	line = NULL;
-	ft_printf("PRINT OF VISUALIZER\n");
-	v->mlx.ptr = mlx_init();
-	if (v->err)
-		return ;
-	create_win(v);
-	v->img = mlx_new_image(v->mlx.ptr, WIDTH, HEIGHT);	
-//	v->pixel_img = mlx_get_data_addr(v->img, &(v->bpp), &(v->s_line), &(v->ed));
 	while (get_next_line(v->fd, &line))
-	{
-		ft_printf("%s\n", line);
-//		check_for_error(v, line);
-//		if (ft_strequ(line, "SOLUTION") && (v->got_paths = 1))
-//			ft_strdel(&line);
-//		else if (!v->got_paths)
-//			;
-//		else
-//			get_solution(v, line);
-	}
-//	mlx_put_image_to_window(v->mlx.ptr, v->mlx.win, v->img, 0, 0);
-//	print_list(v->list);
-//	ft_printf("S = %s, E = %s\n", v->s->name, v->e->name);
-
+		ft_lstadd(&v->file, ft_lstnew_noalloc(line));
+	v->file = ft_lstrev(v->file);
+	check_for_error(v);
 }

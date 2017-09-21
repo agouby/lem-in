@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 13:20:42 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/21 16:10:15 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/21 17:55:41 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ int		main(int ac, const char **av)
 	get_paths(&lem);
 	print_args(lem);
 	travel_ants(&lem);
-	exit(0);
-//	if (lem.args.v)
-//		close(lem.args.v_fd);
+	if (lem.args.v)
+		close(lem.args.v_fd);
 	return (0);
 }

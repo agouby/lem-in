@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 22:44:10 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/20 14:03:18 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/21 18:03:34 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,5 @@ void	travel_ants(t_env *lem)
 		travel_multipath(lem);
 	del_hash(lem->hash);
 	del_paths(lem->paths);
+	ft_lstdel(&lem->file, del_file);
 }

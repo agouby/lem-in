@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 22:14:10 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/20 22:38:46 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/21 22:09:32 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void		draw_point(t_env *v, t_coord p, int color)
 {
 	int i;
 
-	if ((int)p.x < 0 || (int)p.x >= WIDTH || (int)p.y < 0 || (int)p.y >= HEIGHT)
+	if ((int)p.x < 0 || (int)p.x >= WIN_X || (int)p.y < 0 || (int)p.y >= WIN_Y)
 		return ;
-	i = ((int)p.x * 4) + ((int)p.y * v->s_line);
-	v->pixel_img[i] = color;
-	v->pixel_img[++i] = color >> 8;
-	v->pixel_img[++i] = color >> 16;
+	i = ((int)p.x * 4) + ((int)p.y * v->mlx.s_line);
+	v->mlx.pixel_img[i] = color;
+	v->mlx.pixel_img[++i] = color >> 8;
+	v->mlx.pixel_img[++i] = color >> 16;
 }
 
 t_bres	draw_line_set(t_coord p1, t_coord p2)

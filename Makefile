@@ -6,11 +6,11 @@
 #    By: agouby <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/09 13:13:02 by agouby            #+#    #+#              #
-#    Updated: 2017/09/21 16:24:52 by agouby           ###   ########.fr        #
+#    Updated: 2017/09/21 21:36:14 by agouby           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-COMP_LIB = y
+COMP_LIB = n
 NAME = lem-in
 CC = gcc
 CFLA = -Wall -Werror -Wextra

@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 13:14:55 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/20 14:49:15 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/21 20:58:22 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,12 @@ typedef struct	s_args
 	int				v_fd;
 	size_t			max_path;
 }				t_args;
+
+typedef struct	s_limit
+{
+	long	min;
+	long	max;
+}				t_limit;
 
 typedef struct	s_env
 {

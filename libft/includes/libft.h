@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 18:03:27 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/20 10:12:50 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/21 21:33:43 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <string.h>
 
-# define ABS(X) (X < 0 ? -X : X)
+# define ABS(X) ((X) < 0 ? -(X) : (X))
 # define BUFF_SIZE 200
 
 typedef struct	s_list
@@ -35,8 +35,8 @@ typedef struct	s_split
 
 typedef struct	s_coord
 {
-	size_t	x;
-	size_t y;
+	long	x;
+	long	y;
 }				t_coord;
 
 char			*ft_strnjoin_del_1(char *s1, char *s2, int s, int e);
