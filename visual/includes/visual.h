@@ -15,14 +15,17 @@
 
 # include "ft_printf.h"
 # include "mlx.h"
-# include "key_macos.h" 
+//# include "key_macos.h" 
+# include "key_linux.h" 
 # include <fcntl.h>
 
 # define WIN_X	2000
 # define WIN_Y	1000
-# define OFFSET 50
-# define MAP_X	((WIN_X / 2) - 2 * OFFSET)
-# define MAP_Y	(WIN_Y - 2 * OFFSET)
+
+# define OFFSET 75
+
+# define MAP_X (1303 - 2 * OFFSET)
+# define MAP_Y	(912 - 2 * OFFSET)
 
 # define LN_CLR	0x8F8F8F
 
@@ -32,6 +35,8 @@ typedef struct	s_mlx
 	void	*win;
 	char	*pixel_img;
 	void	*img;
+	void	*room;
+	void	*back;
 	int		bpp;
 	int		ed;
 	int		s_line;
@@ -97,5 +102,6 @@ char			*get_room(t_env *v, char *line, t_room **r);
 void			get_infos(t_env *v);
 void			print_list(t_rlist *list);
 void			create_img(t_env *v);
+void			clear_img(t_env *v);
 
 #endif

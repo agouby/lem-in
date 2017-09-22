@@ -1,1 +1,12 @@
-NOVIS
+100 1600 200 800
+start 900 800 room4 600 400
+room4 600 400 end 900 200
+start 900 800 room1 100 500
+room1 100 500 end 900 200
+start 900 800 room2 1600 700
+room2 1600 700 room3 1600 300
+room3 1600 300 end 900 200
+SOLUTION
+L1-room4 L2-room1 L3-room2 
+L1-end L4-room4 L2-end L5-room1 L3-room3 
+L4-end L5-end L3-end 

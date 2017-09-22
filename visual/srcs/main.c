@@ -33,6 +33,18 @@ void	print_shit(t_env v)
 	}
 }
 
+void	print_lol(t_env *v)
+{
+	t_rlist	*tmp;
+
+	tmp = v->list;
+	while (tmp)
+	{
+		mlx_put_image_to_window(v->mlx.ptr, v->mlx.win, v->mlx.room, tmp->r->c.x + 45 - 25, tmp->r->c.y + 45 - 25);
+		tmp = tmp->next;
+	}
+}
+
 int		main(void)
 {
 	t_env	v;
@@ -45,14 +57,19 @@ int		main(void)
 	v.mlx.ptr = mlx_init();
 	create_win(&v);
 	create_img(&v);
+	clear_img(&v);
+	int size = 50;
+	int sx = 2000;
+	int sy = 1000;
+	v.mlx.room = mlx_xpm_file_to_image(v.mlx.ptr, "visual/img/room.xpm", &size, &size);
+	v.mlx.back = mlx_xpm_file_to_image(v.mlx.ptr, "visual/img/back.xpm", &sx, &sy);
 	if (v.err)
 		print_err(&v);
 	else
-	{
 		get_infos(&v);
-//		print_shit(v);
-		mlx_put_image_to_window(v.mlx.ptr, v.mlx.win, v.mlx.img, 0, 0);
-	}
+	mlx_put_image_to_window(v.mlx.ptr, v.mlx.win, v.mlx.back, 0, 0);
+	mlx_put_image_to_window(v.mlx.ptr, v.mlx.win, v.mlx.img, 45, 45);
+	print_lol(&v);
 	mlx_hook(v.mlx.win, 2, 3, key_hook, &v);
 	mlx_loop(v.mlx.ptr);
 	return (0);

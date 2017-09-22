@@ -12,8 +12,6 @@
 
 #include "visual.h"
 
-#include <stdio.h>
-
 void	get_connexions(t_env *v, char *line)
 {
 	char	*tmp;
@@ -54,8 +52,8 @@ void	get_limits(t_env *v, char *line)
 		v->fac_x = (float)MAP_X / (float)v->dist.x;
 	if ((v->dist.y = v->y.max - v->y.min))
 		v->fac_y = (float)MAP_Y / (float)v->dist.y;
-	ft_printf("%d, %d\n", v->dist.x, v->dist.y);
-	printf("%f, %f\n", v->fac_x, v->fac_y);
+//	ft_printf("%d, %d\n", v->dist.x, v->dist.y);
+//	printf("%f, %f\n", v->fac_x, v->fac_y);
 }
 
 void	get_infos(t_env *v)

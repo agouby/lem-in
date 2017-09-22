@@ -19,7 +19,7 @@ void	create_win(t_env *v)
 
 void	create_img(t_env *v)
 {
-	v->mlx.img = mlx_new_image(v->mlx.ptr, WIN_X, WIN_Y);
+	v->mlx.img = mlx_new_image(v->mlx.ptr, MAP_X + OFFSET * 2, MAP_Y + OFFSET * 2);
 	v->mlx.pixel_img =
 		mlx_get_data_addr(v->mlx.img, &v->mlx.bpp, &v->mlx.s_line, &v->mlx.ed);
 }
