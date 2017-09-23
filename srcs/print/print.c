@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 11:11:58 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/21 21:04:32 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/23 01:43:22 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	print_paths(t_env lem)
 {
 	t_path	*tmp;
 	t_rlist	*tmp_lst;
-	size_t	i;
 
 	ft_printf("PRINTING PATH \n\n");
 	tmp = lem.paths;
@@ -56,17 +55,14 @@ void	print_paths(t_env lem)
 	{
 		lst_rev(&tmp->lst);
 		tmp_lst = tmp->lst;
-		i = 0;
 		while (tmp_lst)
 		{
 			ft_printf("%s", tmp_lst->r->name);
 			if (tmp_lst->next)
 				ft_printf(" - ");
 			tmp_lst = tmp_lst->next;
-			i++;
 		}
 		lst_rev(&tmp->lst);
-		ft_printf("     Path len = %d\n", i);
 		tmp = tmp->next;
 	}
 	ft_printf("\n");
@@ -120,6 +116,7 @@ void	print_visual_infos(t_env lem)
 	t_rlist *tmp_lst;
 
 	print_coords_inf(lem);
+	ft_dprintf(lem.args.v_fd, "%s %s\n", lem.start->r->name, lem.end->r->name);
 	tmp = lem.paths;
 	while (tmp)
 	{
@@ -127,7 +124,10 @@ void	print_visual_infos(t_env lem)
 		tmp_lst = tmp->lst;
 		while (tmp_lst->next)
 		{
-			ft_dprintf(lem.args.v_fd, "%s %d %d %s %d %d\n", tmp_lst->r->name, tmp_lst->r->x, tmp_lst->r->y, tmp_lst->next->r->name, tmp_lst->next->r->x, tmp_lst->next->r->y);
+			ft_dprintf(lem.args.v_fd, "%s %d %d %s %d %d\n",
+					tmp_lst->r->name, tmp_lst->r->x, tmp_lst->r->y,
+					tmp_lst->next->r->name, tmp_lst->next->r->x,
+					tmp_lst->next->r->y);
 			tmp_lst = tmp_lst->next;
 		}
 		lst_rev(&tmp->lst);

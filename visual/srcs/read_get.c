@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 17:16:23 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/21 22:53:48 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/23 01:36:58 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ char	*get_room(t_env *v, char *line, t_room **r)
 	*ptr = '\0';
 	(*r) = (t_room *)malloc(sizeof(t_room));
 	(*r)->name = ft_strdup(line);
+	(*r)->has_ant = 0;
 	ptr++;
 	(*r)->c.x = ft_atou(ptr);
 	while (ft_isdigit(*ptr))

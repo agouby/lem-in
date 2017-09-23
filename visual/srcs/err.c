@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 14:49:46 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/21 21:21:31 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/22 23:33:20 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	check_for_error(t_env *v)
 {
+	if (!v->file)
+		ft_print_error("File is empty.\n");
 	if (ft_strequ(v->file->content, "NOVIS"))
 	{
 		ft_printf("No visualizer I quit.\n");
@@ -25,5 +27,6 @@ void	check_for_error(t_env *v)
 
 void	print_err(t_env *v)
 {
-	mlx_string_put(v->mlx.ptr, v->mlx.win, WIN_X / 2, WIN_Y / 2, 0xFFFFFF, "ERROR.");
+	mlx_string_put(v->mlx.ptr, v->mlx.win,
+			WIN_X / 2, WIN_Y / 2, 0xFFFFFF, "ERROR.");
 }
