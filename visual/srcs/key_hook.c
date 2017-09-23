@@ -12,9 +12,23 @@
 
 #include "visual.h"
 
-int		key_hook(int key)
+int		key_hook(int key, t_env *v)
 {
 	if (key == K_ESC)
 		exit(0);
+	else if (key == K_AR_L)
+	{
+		if (v->cur_shot == -1)
+			return (0);
+		v->cur_shot--;
+		print_shot(v);
+	}
+	else if (key == K_AR_R)
+	{
+		if (v->cur_shot + 1 == (long)v->nb_shots)
+			return (0);
+		v->cur_shot++;
+		print_shot(v);
+	}
 	return (0);
 }

@@ -17,6 +17,7 @@ int		main(void)
 	t_env	v;
 
 	ft_memset(&v, 0, sizeof(t_env));
+	v.cur_shot = -1;
 	v.fd = open("visual_infos", O_RDONLY);
 	if (v.fd == -1)
 		ft_print_error("File not found.\n");

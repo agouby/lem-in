@@ -15,8 +15,8 @@
 
 # include "ft_printf.h"
 # include "mlx.h"
-# include "key_macos.h" 
-//# include "key_linux.h" 
+//# include "key_macos.h" 
+# include "key_linux.h" 
 # include <fcntl.h>
 
 # define WIN_X	2000
@@ -48,7 +48,6 @@ typedef struct	s_mlx
 typedef struct	s_room
 {
 	char	*name;
-	char	has_ant;
 	t_coord	c;
 }				t_room;
 
@@ -81,7 +80,7 @@ typedef struct	s_env
 	char	got_paths;
 	char	**sol;
 	size_t	nb_shots;
-	size_t	cur_shot;
+	long	cur_shot;
 	t_rlist	*list;
 	t_list	*file;
 	t_room	start;
@@ -97,7 +96,7 @@ typedef struct	s_env
 void			read_file(t_env *v);
 void			check_for_error(t_env *v);
 void			create_win(t_env *v);
-int				key_hook(int key);
+int			key_hook(int key, t_env *v);
 void			print_err(t_env *v);
 t_rlist			*rlist_newalloc(t_room *r);
 t_rlist			*rlist_new(t_room *r);
@@ -115,5 +114,6 @@ void			start_mlx(t_env *v);
 void			print_back(t_env *v);
 void			print_map(t_env *v);
 void			print_shot(t_env *v);
+void			print_rooms(t_env *v);
 
 #endif

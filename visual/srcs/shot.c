@@ -12,41 +12,58 @@
 
 #include "visual.h"
 
-void	write_ant_in_room(t_env *v, char *line)
+void	clear_rooms(t_env *v)
 {
 	t_rlist	*tmp;
 
 	tmp = v->list;
 	while (tmp)
 	{
-		if (ft_strequ(tmp->r->name, line))
-			tmp->r->has_ant = 1;
+		if (!ft_strequ(tmp->r->name, v->start.name) && !ft_strequ(tmp->r->name, v->end.name))
+			mlx_put_image_to_window(v->mlx.ptr, v->mlx.win, v->mlx.room_f,
+				tmp->r->c.x + 45 - 25, tmp->r->c.y + 45 - 25);
 		tmp = tmp->next;
 	}
 }
 
-void	mark_room(t_env *v)
+void	write_ant_in_room(t_env *v, char *line)
 {
-	char	*line;
-	char	*ptr;
+	t_rlist	*tmp;
 
-	line = v->sol[v->cur_shot];
-	ptr = ft_strchr(line, '-');
-	if (!ptr)
-		ft_print_error("File is corrupted.\n");
-	ptr++;
-	line = ptr;
-	ptr = ft_strchr(line, ' ');
-	*ptr = '\0';
-	write_ant_in_room(v, line);
-	ptr = ft_strchr(line, '-');
-	if (!ptr)
-		ft_print_error("File is corrupted.\n");
-	ptr++;
-	write_ant_in_room(v, ptr);
+	tmp = v->list;
+	while (v->list)
+	{
+		if (ft_strequ(v->list->r->name, v->end.name))
+			;
+		else if (ft_strequ(v->list->r->name, line))
+		{
+			mlx_put_image_to_window(v->mlx.ptr, v->mlx.win, v->mlx.room_t,
+				v->list->r->c.x + 45 - 25, v->list->r->c.y + 45 - 25);
+		}
+		v->list = v->list->next;
+	}
+	v->list = tmp;
 }
 
 void	print_shot(t_env *v)
 {
-	mark_room(v);
+	char	*line;
+	char	*ptr;
+
+	clear_rooms(v);
+	if (v->cur_shot == -1)
+		return ;
+	line = v->sol[v->cur_shot];
+	while (1)
+	{
+		line = ft_strchr(line, '-');
+		if (!line)
+			return ;
+		line++;
+		ptr = ft_strchr(line, ' ');
+		*ptr = '\0';
+		write_ant_in_room(v, line);
+		*ptr = ' ';
+		ptr++;
+	}
 }

@@ -41,8 +41,6 @@ void	print_rooms(t_env *v)
 			room = v->mlx.room_s;
 		else if (ft_strequ(tmp->r->name, v->end.name))
 			room = v->mlx.room_s;
-		else if (tmp->r->has_ant)
-			room = v->mlx.room_t;
 		else
 			room = v->mlx.room_f;
 		mlx_put_image_to_window(v->mlx.ptr, v->mlx.win, room,

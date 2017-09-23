@@ -34,7 +34,6 @@ char	*get_room(t_env *v, char *line, t_room **r)
 	*ptr = '\0';
 	(*r) = (t_room *)malloc(sizeof(t_room));
 	(*r)->name = ft_strdup(line);
-	(*r)->has_ant = 0;
 	ptr++;
 	(*r)->c.x = ft_atou(ptr);
 	while (ft_isdigit(*ptr))

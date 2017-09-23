@@ -31,12 +31,12 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	#@$(CC) $(FLA) -o $(NAME) $(OBJ) $(LIB_PATH) $(LIB_MLX_LIN) $(MLX_FLA_LIN)
+	@$(CC) $(FLA) -o $(NAME) $(OBJ) $(LIB_PATH) $(LIB_MLX_LIN) $(MLX_FLA_LIN)
 
-	@$(CC) $(FLA) -o $(NAME) $(OBJ) $(LIB_PATH) $(INC_MLX_MAC) $(LIB_MLX_MAC) $(MLX_FLA_MAC)
+	#@$(CC) $(FLA) -o $(NAME) $(OBJ) $(LIB_PATH) $(INC_MLX_MAC) $(LIB_MLX_MAC) $(MLX_FLA_MAC)
 
 %.o: %.c
-	@$(CC) $(FLA) $(INC) $(INC_LIB) $(INC_MLX_MAC) -c $< -o $@
+	@$(CC) $(FLA) $(INC) $(INC_LIB) $(INC_MLX_LIN) -c $< -o $@
 
 clean:
 	@/bin/rm -f minilibx_macos/*.o
