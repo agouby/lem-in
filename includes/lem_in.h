@@ -19,6 +19,7 @@
 
 # define H_SIZE		1000000
 # define MAX_PATH	1000000
+# define INT_LIMIT	2147483647
 
 typedef struct	s_room
 {
@@ -64,7 +65,7 @@ typedef struct	s_limit
 
 typedef struct	s_env
 {
-	size_t			ants_nb;
+	size_t		ants_nb;
 	unsigned char	direct;
 	t_rlist			**hash;
 	t_rlist			*start;

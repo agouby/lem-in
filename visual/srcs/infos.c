@@ -61,6 +61,11 @@ void	get_start_and_end(t_env *v, char *line)
 	char *ptr;
 
 	ptr = ft_strchr(line, ' ');
+	if (!ptr)
+	{
+		ft_lstdel(&v->file, del_file);
+		ft_print_error("File is corrupted.\n");
+	}
 	*ptr = '\0';
 	ptr++;
 	v->start.name = line;
@@ -79,6 +84,8 @@ void	get_sol_tab(t_env *v, t_list *list)
 		list = list->next;
 		i++;
 	}
+	if (i == 1)
+		v->direct = 1;
 	v->sol[i] = NULL;
 }
 
@@ -87,6 +94,13 @@ void	get_infos(t_env *v)
 	t_list	*tmp;
 
 	tmp = v->file;
+	if (!ft_strisdigit(tmp->content))
+	{
+		ft_lstdel(&v->file, del_file);
+		ft_print_error("File is corrupted.\n");
+	}
+	v->nb_ants = ft_atou(tmp->content);
+	tmp = tmp->next;
 	get_limits(v, tmp->content);
 	tmp = tmp->next;
 	get_start_and_end(v, tmp->content);
@@ -98,6 +112,11 @@ void	get_infos(t_env *v)
 	{
 		get_connexions(v, tmp->content);
 		tmp = tmp->next;
+	}
+	if (!tmp)
+	{
+		del_mlx(v);
+		ft_print_error("File is corrupted.\n");
 	}
 	print_map(v);
 	tmp = tmp->next;

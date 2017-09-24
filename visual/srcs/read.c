@@ -50,7 +50,7 @@ void	read_file(t_env *v)
 	line = NULL;
 	while (get_next_line(v->fd, &line))
 		ft_lstadd(&v->file, ft_lstnew_noalloc(line));
+	ft_strdel(&line);
 	v->file = ft_lstrev(v->file);
-	print_file(v->file);
 	check_for_error(v);
 }

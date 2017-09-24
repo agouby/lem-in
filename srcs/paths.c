@@ -49,15 +49,13 @@ void	get_paths(t_env *lem)
 {
 	unsigned int	max_path;
 
+	if (!lem->start || !lem->end)
+		quit_parsing(lem);
 	max_path = get_start_nei(lem->start);
 	if (lem->args.max_path && (lem->args.max_path < max_path))
 		max_path = lem->args.max_path;
 	if ((lem->direct = is_in_list(lem->start->r->nei, lem->end->r->name)))
-	{
-		if (lem->args.v)
-			ft_dprintf(lem->args.v_fd, "DIRECT\n");
 		return ;
-	}
 	while (max_path)
 	{
 		lem->start_fnd = 0;

@@ -19,7 +19,8 @@ void	get_ants(t_env *lem, t_parser *pars, ssize_t *gnl_ret)
 	line = NULL;
 	*gnl_ret = get_next_line(0, &line);
 	pars->ln++;
-	if (ft_strisdigit(line) && (lem->ants_nb = ft_atou(line)) > 0)
+	lem->ants_nb = ft_atou(line);
+	if (ft_strisdigit(line) && lem->ants_nb > 0 && lem->ants_nb < INT_LIMIT)
 		push_in_file(lem, line);
 	else
 		parse_err(lem, pars, &line, ERR_ANTS);

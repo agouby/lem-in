@@ -77,10 +77,11 @@ typedef struct	s_env
 {
 	int		fd;
 	char	err;
-	char	got_paths;
 	char	**sol;
 	size_t	nb_shots;
+	size_t	nb_ants;
 	long	cur_shot;
+	size_t	nb_paths;
 	t_rlist	*list;
 	t_list	*file;
 	t_room	start;
@@ -89,6 +90,7 @@ typedef struct	s_env
 	t_limit	y;
 	float	fac_x;
 	float	fac_y;
+	char	direct;
 	t_coord	dist;
 	t_mlx	mlx;
 }				t_env;
@@ -115,5 +117,7 @@ void			print_back(t_env *v);
 void			print_map(t_env *v);
 void			print_shot(t_env *v);
 void			print_rooms(t_env *v);
+void			del_file(void *content, size_t size);
+void			del_mlx(t_env *v);
 
 #endif

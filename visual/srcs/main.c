@@ -22,10 +22,7 @@ int		main(void)
 	if (v.fd == -1)
 		ft_print_error("File not found.\n");
 	read_file(&v);
-	if (v.err)
-		print_err(&v);
-	else
-		get_infos(&v);
+	get_infos(&v);
 	mlx_hook(v.mlx.win, 2, 3, key_hook, &v);
 	mlx_loop(v.mlx.ptr);
 	return (0);

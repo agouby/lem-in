@@ -14,19 +14,11 @@
 
 void	check_for_error(t_env *v)
 {
-	if (!v->file)
-		ft_print_error("File is empty.\n");
-	if (ft_strequ(v->file->content, "NOVIS"))
+	if (v->file == NULL || ft_strequ(v->file->content, "ERROR"))
 	{
-		ft_printf("No visualizer I quit.\n");
-		exit(0);
+		ft_printf("Error. Make sure you set the flag ");
+		ft_printf("and check for errors in the terminal.\n");
+		ft_lstdel(&v->file, del_file);
+		exit(1);
 	}
-	if (ft_strequ(v->file->content, "ERROR"))
-		v->err = 1;
-}
-
-void	print_err(t_env *v)
-{
-	mlx_string_put(v->mlx.ptr, v->mlx.win,
-			WIN_X / 2, WIN_Y / 2, 0xFFFFFF, "ERROR.");
 }

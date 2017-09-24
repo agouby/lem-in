@@ -21,7 +21,7 @@ int		main(int ac, const char **av)
 	system("rm -f visual_infos");
 	get_args(&lem, av);
 	if (!lem.args.v)
-		ft_dprintf(lem.args.v_fd, "NOVIS");
+		ft_dprintf(lem.args.v_fd, "ERROR");
 	parse_map(&lem);
 	check_lonely_rooms(lem);
 	get_paths(&lem);

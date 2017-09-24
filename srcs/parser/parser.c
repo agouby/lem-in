@@ -27,7 +27,8 @@ void	parsing_process(t_env *lem, t_parser *pars, char *line)
 	}
 	else
 		parse_err(lem, pars, &line, ERR_LINE);
-	push_in_file(lem, line);
+	if (!pars->err)
+		push_in_file(lem, line);
 }
 
 void	parse_map(t_env *lem)

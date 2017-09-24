@@ -14,11 +14,11 @@
 
 void	init_err_tab(t_env *lem)
 {
-	lem->err_t[ERR_ANTS] = "No ants.";
+	lem->err_t[ERR_ANTS] = "No ants or too many ants.";
 	lem->err_t[ERR_RNAME] = "Room has invalid name.";
 	lem->err_t[ERR_COORD] = "Room has invalid coordinates.";
 	lem->err_t[ERR_LINE] = "Line has invalid format.";
-	lem->err_t[ERR_CMD] = "Multiple start or end commands.";
+	lem->err_t[ERR_CMD] = "Unique or multiple start or end commands.";
 	lem->err_t[ERR_TNAME] = "Tube has invalid name.";
 	lem->err_t[ERR_NOPATH] = "No path found.";
 	lem->err_t[CERR_NOTUBE] = "Tubes are missing.";

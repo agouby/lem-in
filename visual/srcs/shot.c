@@ -49,13 +49,17 @@ void	print_shot(t_env *v)
 {
 	char	*line;
 	char	*ptr;
+	size_t	cnt;
 
 	clear_rooms(v);
 	if (v->cur_shot == -1)
 		return ;
 	line = v->sol[v->cur_shot];
+	cnt = 0;
 	while (1)
 	{
+		if (!v->nb_paths)
+			cnt++;
 		line = ft_strchr(line, '-');
 		if (!line)
 			return ;
@@ -66,4 +70,5 @@ void	print_shot(t_env *v)
 		*ptr = ' ';
 		ptr++;
 	}
+	v->nb_paths = cnt;
 }

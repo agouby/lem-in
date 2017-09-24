@@ -16,6 +16,8 @@ int		key_hook(int key, t_env *v)
 {
 	if (key == K_ESC)
 		exit(0);
+	if (v->direct)
+		return (0);
 	else if (key == K_AR_L)
 	{
 		if (v->cur_shot == -1)

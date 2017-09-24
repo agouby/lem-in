@@ -10,9 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
-COMP_LIB = n
+COMP_LIB = y
 NAME = lem-in
-CC = gcc
+CC = gcc -g
 CFLA = -Wall -Werror -Wextra
 INC = -I./includes
 INC_LIB = -I./libft/includes
@@ -31,7 +31,7 @@ endif
 	@$(CC) $(CFLA) -o $(NAME) $(OBJ) $(LIB_PATH)
 
 %.o: %.c
-	@printf "\rCompiling $<"
+	@printf "Compiling $<\n"
 	@$(CC) $(CFLA) $(INC) $(INC_LIB) -c $< -o $@
 
 clean:

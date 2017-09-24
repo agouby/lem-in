@@ -115,6 +115,7 @@ void	print_visual_infos(t_env lem)
 	t_path	*tmp;
 	t_rlist *tmp_lst;
 
+	ft_dprintf(lem.args.v_fd, "%d\n", lem.ants_nb);
 	print_coords_inf(lem);
 	ft_dprintf(lem.args.v_fd, "%s %s\n", lem.start->r->name, lem.end->r->name);
 	tmp = lem.paths;

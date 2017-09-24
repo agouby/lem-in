@@ -35,6 +35,8 @@ void		deal_with_double(t_env *lem, t_parser *pars, char *line)
 		crit_err(lem, CERR_DUPR);
 		read_and_delete(line, 1);
 		del_hash(lem->hash);
+		if (!lem->args.nopfile)
+			ft_lstdel(&lem->file, del_file);
 		ft_strdel(&line);
 		exit(1);
 	}
