@@ -12,7 +12,7 @@
 
 COMP_LIB = y
 NAME = lem-in
-CC = gcc -g
+CC = gcc #-g -fsanitize=address
 CFLA = -Wall -Werror -Wextra
 INC = -I./includes
 INC_LIB = -I./libft/includes
@@ -24,6 +24,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ) $(SRC_V)
+
 ifeq ($(COMP_LIB), y)
 	@make -C libft
 endif

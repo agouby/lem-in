@@ -18,17 +18,6 @@ void		rlist_add(t_rlist **old, t_rlist *new)
 	*old = new;
 }
 
-t_rlist		*rlist_newalloc(t_room *r)
-{
-	t_rlist *new;
-
-	new = (t_rlist *)malloc(sizeof(t_rlist));
-	new->r = (t_room *)malloc(sizeof(t_room));
-	ft_memcpy(new->r, r, sizeof(t_room));
-	new->next = NULL;
-	return (new);
-}
-
 t_rlist		*rlist_new(t_room *r)
 {
 	t_rlist *new;

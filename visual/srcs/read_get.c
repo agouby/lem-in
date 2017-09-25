@@ -32,7 +32,6 @@ char	*get_room(t_env *v, char *line, t_room **r)
 
 	ptr = ft_strchr(line, ' ');
 	*ptr = '\0';
-	(*r) = (t_room *)malloc(sizeof(t_room));
 	(*r)->name = ft_strdup(line);
 	ptr++;
 	(*r)->c.x = ft_atou(ptr);
@@ -42,8 +41,6 @@ char	*get_room(t_env *v, char *line, t_room **r)
 	(*r)->c.y = ft_atou(ptr);
 	while (ft_isdigit(*ptr))
 		ptr++;
-	if (!check_exist(v->list, line))
-		rlist_add(&v->list, rlist_new(*r));
 	(*r)->c.x = (*r)->c.x - v->x.min;
 	(*r)->c.y = (*r)->c.y - v->y.min;
 	(*r)->c.x *= v->fac_x;

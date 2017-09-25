@@ -32,8 +32,10 @@ t_rlist		*rlist_newalloc(t_room *r)
 {
 	t_rlist *new;
 
-	new = (t_rlist *)malloc(sizeof(t_rlist));
-	new->r = (t_room *)malloc(sizeof(t_room));
+	if (!(new = (t_rlist *)malloc(sizeof(t_rlist))))
+		ft_memerr();
+	if (!(new->r = (t_room *)malloc(sizeof(t_room))))
+		ft_memerr();
 	ft_memcpy(new->r, r, sizeof(t_room));
 	new->next = NULL;
 	return (new);

@@ -22,3 +22,5 @@ void	check_for_error(t_env *v)
 		exit(1);
 	}
 }
+
+

@@ -24,9 +24,17 @@ void	get_connexions(t_env *v, char *line)
 	while (tmp)
 	{
 		prev = cur;
+		cur = (t_room *)malloc(sizeof(t_room));
 		tmp = get_room(v, tmp, &cur);
 		if (prev)
 			draw_line(v, prev->c, cur->c);
+		if (!check_exist(v->list, tmp))
+			rlist_add(&v->list, rlist_new(cur));
+		else
+		{
+			ft_strdel(&cur->name);
+			ft_memdel((void **)&cur);
+		}
 	}
 }
 
@@ -107,7 +115,6 @@ void	get_infos(t_env *v)
 	tmp = tmp->next;
 	start_mlx(v);
 	print_back(v);
-	create_map(v);
 	while (tmp && !ft_strequ(tmp->content, "SOLUTION"))
 	{
 		get_connexions(v, tmp->content);

@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME = ../visual.fx
-CC = gcc
+CC = gcc -g
 FLA = -Wall -Werror -Wextra
 INC = -I./includes
 INC_LIB = -I../libft/includes

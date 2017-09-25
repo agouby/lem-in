@@ -100,7 +100,6 @@ void			check_for_error(t_env *v);
 void			create_win(t_env *v);
 int			key_hook(int key, t_env *v);
 void			print_err(t_env *v);
-t_rlist			*rlist_newalloc(t_room *r);
 t_rlist			*rlist_new(t_room *r);
 void			rlist_add(t_rlist **old, t_rlist *n);
 void			rlist_addb(t_rlist **old, t_rlist *n);
@@ -119,5 +118,6 @@ void			print_shot(t_env *v);
 void			print_rooms(t_env *v);
 void			del_file(void *content, size_t size);
 void			del_mlx(t_env *v);
+char			check_exist(t_rlist *list, char *line);
 
 #endif
