@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 02:00:22 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/23 02:12:47 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/25 21:26:05 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	clear_rooms(t_env *v)
 	tmp = v->list;
 	while (tmp)
 	{
-		if (!ft_strequ(tmp->r->name, v->start.name) && !ft_strequ(tmp->r->name, v->end.name))
+		if (!ft_strequ(tmp->r->name, v->start.name) &&
+				!ft_strequ(tmp->r->name, v->end.name))
 			mlx_put_image_to_window(v->mlx.ptr, v->mlx.win, v->mlx.room_f,
 				tmp->r->c.x + 45 - 25, tmp->r->c.y + 45 - 25);
 		tmp = tmp->next;

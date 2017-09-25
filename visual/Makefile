@@ -6,7 +6,7 @@
 #    By: agouby <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/20 12:30:24 by agouby            #+#    #+#              #
-#    Updated: 2017/09/22 23:00:22 by agouby           ###   ########.fr        #
+#    Updated: 2017/09/25 18:51:45 by agouby           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,20 +31,20 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	make -C minilibx_X11
-	@$(CC) $(FLA) -o $(NAME) $(OBJ) $(LIB_PATH) $(LIB_MLX_LIN) $(MLX_FLA_LIN)
+	make -C minilibx_macos
+	#@$(CC) $(FLA) -o $(NAME) $(OBJ) $(LIB_PATH) $(LIB_MLX_LIN) $(MLX_FLA_LIN)
 
-	#@$(CC) $(FLA) -o $(NAME) $(OBJ) $(LIB_PATH) $(INC_MLX_MAC) $(LIB_MLX_MAC) $(MLX_FLA_MAC)
+	@$(CC) $(FLA) -o $(NAME) $(OBJ) $(LIB_PATH) $(INC_MLX_MAC) $(LIB_MLX_MAC) $(MLX_FLA_MAC)
 
 %.o: %.c
-	@$(CC) $(FLA) $(INC) $(INC_LIB) $(INC_MLX_LIN) -c $< -o $@
+	@$(CC) $(FLA) $(INC) $(INC_LIB) $(INC_MLX_MAC) -c $< -o $@
 
 clean:
-	@/bin/rm -f minilibx_X11/*.o
+	@/bin/rm -f minilibx_macos/*.o
 	@/bin/rm -f $(OBJ)
 
 fclean: clean
-	@/bin/rm -f minilibx_X11/*.a
+	@/bin/rm -f minilibx_macos/*.a
 	@/bin/rm -f $(NAME)
 re : fclean all
 

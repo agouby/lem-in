@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 17:16:23 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/23 01:36:58 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/25 21:26:34 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,38 @@ char	check_exist(t_rlist *list, char *line)
 	return (0);
 }
 
+void	calc_coords(t_env *v, long *x, long *y)
+{
+	*x = *x - v->x.min;
+	*y = *y - v->y.min;
+	*x *= v->fac_x;
+	*y *= v->fac_y;
+	*x += OFFSET;
+	*y += OFFSET;
+}
+
 char	*get_room(t_env *v, char *line, t_room **r)
 {
 	char	*ptr;
 
-	ptr = ft_strchr(line, ' ');
+	if (!(ptr = ft_strchr(line, ' ')))
+		ft_print_error("File is corrupted.\n");
 	*ptr = '\0';
+	if (!*line)
+		ft_print_error("File is corrupted.\n");
 	(*r)->name = ft_strdup(line);
 	ptr++;
+	if (*ptr == '-')
+		ft_print_error("Error coordinates.\n");
 	(*r)->c.x = ft_atou(ptr);
 	while (ft_isdigit(*ptr))
 		ptr++;
 	ptr++;
+	if (*ptr == '-')
+		ft_print_error("Error coordinates.\n");
 	(*r)->c.y = ft_atou(ptr);
 	while (ft_isdigit(*ptr))
 		ptr++;
-	(*r)->c.x = (*r)->c.x - v->x.min;
-	(*r)->c.y = (*r)->c.y - v->y.min;
-	(*r)->c.x *= v->fac_x;
-	(*r)->c.y *= v->fac_y;
-	(*r)->c.x += OFFSET;
-	(*r)->c.y += OFFSET;
+	calc_coords(v, &(*r)->c.x, &(*r)->c.y);
 	return ((*ptr) ? ptr + 1 : NULL);
 }

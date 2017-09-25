@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 13:14:55 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/23 01:21:26 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/25 21:27:24 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct	s_limit
 
 typedef struct	s_env
 {
-	size_t		ants_nb;
+	size_t			ants_nb;
 	unsigned char	direct;
 	t_rlist			**hash;
 	t_rlist			*start;
@@ -134,5 +134,7 @@ void			del_paths(t_path *paths);
 char			valid_room_name(const char *line, int *err);
 char			valid_room_coords(const char *line, int *err);
 void			print_visual_infos(t_env lem);
+void			init_limits(t_limit *x, t_limit *y);
+void			get_limits(t_room *r, t_limit *x, t_limit *y);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 22:14:10 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/23 01:37:06 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/25 21:21:38 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		draw_point(t_env *v, t_coord p, int color)
 	v->mlx.pixel_img[++i] = color >> 16;
 }
 
-t_bres	draw_line_set(t_coord p1, t_coord p2)
+t_bres		draw_line_set(t_coord p1, t_coord p2)
 {
 	t_bres bres;
 
@@ -42,7 +42,7 @@ t_bres	draw_line_set(t_coord p1, t_coord p2)
 	return (bres);
 }
 
-void	draw_line(t_env *v, t_coord p1, t_coord p2)
+void		draw_line(t_env *v, t_coord p1, t_coord p2)
 {
 	t_bres bres;
 
@@ -64,4 +64,3 @@ void	draw_line(t_env *v, t_coord p1, t_coord p2)
 	}
 	draw_point(v, p1, LN_CLR);
 }
-

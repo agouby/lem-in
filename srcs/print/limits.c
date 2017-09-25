@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   del.c                                              :+:      :+:    :+:   */
+/*   limits.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/25 21:19:43 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/25 21:20:06 by agouby           ###   ########.fr       */
+/*   Created: 2017/09/25 21:17:16 by agouby            #+#    #+#             */
+/*   Updated: 2017/09/25 21:19:37 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "visual.h"
+#include "lem_in.h"
 
-void	del_rooms(t_rlist **list)
+void	init_limits(t_limit *x, t_limit *y)
 {
-	t_rlist *tmp;
-
-	while (*list)
-	{
-		tmp = (*list)->next;
-		free((*list)->r->name);
-		free((*list)->r);
-		free((*list));
-		(*list) = tmp;
-	}
+	x->min = -1;
+	x->max = -1;
+	y->min = -1;
+	y->max = -1;
 }
 
-void	del_mlx(t_env *v)
+void	get_limits(t_room *r, t_limit *x, t_limit *y)
 {
-	ft_lstdel(&v->file, del_file);
-	mlx_destroy_image(v->mlx.ptr, v->mlx.map);
-	mlx_destroy_image(v->mlx.ptr, v->mlx.back);
-	mlx_destroy_window(v->mlx.ptr, v->mlx.win);
-	del_rooms(&v->list);
+	if (x->min == -1 || (long)r->x < x->min)
+		x->min = r->x;
+	if (x->max == -1 || (long)r->x > x->max)
+		x->max = r->x;
+	if (y->min == -1 || (long)r->y < y->min)
+		y->min = r->y;
+	if (y->max == -1 || (long)r->y > y->max)
+		y->max = r->y;
 }

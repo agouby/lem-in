@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 11:15:44 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/23 02:00:15 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/25 21:39:03 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 
 # include "ft_printf.h"
 # include "mlx.h"
-//# include "key_macos.h" 
-# include "key_linux.h" 
+# include "key_macos.h"
 # include <fcntl.h>
 
 # define WIN_X	2000
@@ -39,6 +38,16 @@ typedef struct	s_mlx
 	void	*room_t;
 	void	*room_s;
 	void	*room_e;
+	void	*ze;
+	void	*on;
+	void	*tw;
+	void	*th;
+	void	*fo;
+	void	*fi;
+	void	*si;
+	void	*se;
+	void	*ei;
+	void	*ni;
 	void	*back;
 	int		bpp;
 	int		ed;
@@ -79,6 +88,7 @@ typedef struct	s_env
 	char	err;
 	char	**sol;
 	size_t	nb_shots;
+	size_t	nb_rooms;
 	size_t	nb_ants;
 	long	cur_shot;
 	size_t	nb_paths;
@@ -98,7 +108,7 @@ typedef struct	s_env
 void			read_file(t_env *v);
 void			check_for_error(t_env *v);
 void			create_win(t_env *v);
-int			key_hook(int key, t_env *v);
+int				key_hook(int key, t_env *v);
 void			print_err(t_env *v);
 t_rlist			*rlist_new(t_room *r);
 void			rlist_add(t_rlist **old, t_rlist *n);
@@ -119,5 +129,12 @@ void			print_rooms(t_env *v);
 void			del_file(void *content, size_t size);
 void			del_mlx(t_env *v);
 char			check_exist(t_rlist *list, char *line);
+void			print_inf(t_env *v);
+void			print_nb(t_env *v, int n, int x, int y);
+void			print_char(t_env *v, char c, int x, int y);
+void			get_connexions(t_env *v, char *line);
+void			get_limits(t_env *v, char *line);
+void			get_start_and_end(t_env *v, char *line);
+void			get_sol_tab(t_env *v, t_list *list);
 
 #endif
