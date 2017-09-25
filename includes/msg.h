@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 22:23:26 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/20 09:58:38 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/26 00:52:36 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,10 @@
 # define ERR_LINE		3
 # define ERR_CMD		4
 # define ERR_TNAME		5
-# define ERR_NOPATH		6
 
-# define CERR_NOTUBE	7
-# define CERR_DUPR		8
-# define CERR_NOPATH	9
+# define CERR_NOTUBE	6
+# define CERR_DUPR		7
+# define CERR_NOPATH	8
 
 # define WAR_RUNKN		1
 # define WAR_RLONE		2

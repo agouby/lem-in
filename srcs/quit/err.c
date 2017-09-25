@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 22:42:14 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/20 00:09:21 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/26 00:52:41 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	init_err_tab(t_env *lem)
 	lem->err_t[ERR_LINE] = "Line has invalid format.";
 	lem->err_t[ERR_CMD] = "Unique or multiple start or end commands.";
 	lem->err_t[ERR_TNAME] = "Tube has invalid name.";
-	lem->err_t[ERR_NOPATH] = "No path found.";
 	lem->err_t[CERR_NOTUBE] = "Tubes are missing.";
 	lem->err_t[CERR_NOPATH] = "No path found.";
 	lem->err_t[CERR_DUPR] = "Duplicated start or end.";
