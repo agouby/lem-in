@@ -15,7 +15,8 @@
 
 # include "ft_printf.h"
 # include "mlx.h"
-# include "key_macos.h"
+//# include "key_macos.h"
+# include "key_linux.h"
 # include <fcntl.h>
 
 # define WIN_X	2000
