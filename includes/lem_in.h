@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 13:14:55 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/26 00:52:18 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/26 16:15:14 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,5 +136,6 @@ char			valid_room_coords(const char *line, int *err);
 void			print_visual_infos(t_env lem);
 void			init_limits(t_limit *x, t_limit *y);
 void			get_limits(t_room *r, t_limit *x, t_limit *y);
+void			lst_rev(t_rlist **rlst);
 
 #endif

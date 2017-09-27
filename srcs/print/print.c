@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 11:11:58 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/25 22:17:06 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/26 16:16:26 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,6 @@ void	print_file(t_env lem)
 	ft_printf("\n");
 }
 
-void	lst_rev(t_rlist **lst)
-{
-	t_rlist	*new;
-	t_rlist	*elem;
-
-	new = NULL;
-	while (*lst)
-	{
-		elem = *lst;
-		*lst = (*lst)->next;
-		elem->next = new;
-		new = elem;
-	}
-	*lst = new;
-}
-
 void	print_paths(t_env lem)
 {
 	t_path	*tmp;
@@ -51,6 +35,8 @@ void	print_paths(t_env lem)
 
 	ft_printf("PRINTING PATH :\n\n");
 	tmp = lem.paths;
+	if (lem.direct)
+		ft_printf("%s - %s\n", lem.start->r->name, lem.end->r->name);
 	while (tmp)
 	{
 		lst_rev(&tmp->lst);

@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 11:43:43 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/11 21:43:18 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/26 16:55:07 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,22 @@ t_rlist		*rlist_newalloc(t_room *r)
 	ft_memcpy(new->r, r, sizeof(t_room));
 	new->next = NULL;
 	return (new);
+}
+
+void		lst_rev(t_rlist **lst)
+{
+	t_rlist	*new;
+	t_rlist	*elem;
+
+	new = NULL;
+	while (*lst)
+	{
+		elem = *lst;
+		*lst = (*lst)->next;
+		elem->next = new;
+		new = elem;
+	}
+	*lst = new;
 }
 
 t_rlist		*del_last_queue(t_rlist **queue)

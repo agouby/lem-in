@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 11:15:44 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/25 22:00:58 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/26 16:48:07 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 
 # include "ft_printf.h"
 # include "mlx.h"
-//# include "key_macos.h"
-# include "key_linux.h"
+# include "key_macos.h"
 # include <fcntl.h>
 
 # define WIN_X	2000

@@ -6,7 +6,7 @@
 /*   By: agouby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 17:01:48 by agouby            #+#    #+#             */
-/*   Updated: 2017/09/25 21:30:00 by agouby           ###   ########.fr       */
+/*   Updated: 2017/09/26 16:48:09 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,11 @@ void	print_map(t_env *v)
 
 void	print_inf(t_env *v)
 {
+	if (v->direct)
+	{
+		v->nb_paths = 1;
+		mlx_string_put(v->mlx.ptr, v->mlx.win, 650, 450, 0xFFFFFF, "DIRECT");
+	}
 	print_nb(v, v->nb_paths, 1670, 81);
 	print_nb(v, v->nb_shots, 1670, 137);
 	print_nb(v, v->nb_ants, 1670, 196);

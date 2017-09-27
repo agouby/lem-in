@@ -6,13 +6,13 @@
 #    By: agouby <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/09 13:13:02 by agouby            #+#    #+#              #
-#    Updated: 2017/09/23 00:01:28 by agouby           ###   ########.fr        #
+#    Updated: 2017/09/26 16:54:08 by agouby           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 COMP_LIB = y
 NAME = lem-in
-CC = gcc #-g -fsanitize=address
+CC = gcc
 CFLA = -Wall -Werror -Wextra
 INC = -I./includes
 INC_LIB = -I./libft/includes
@@ -46,6 +46,7 @@ ifeq ($(COMP_LIB), y)
 	@make fclean -C libft
 endif
 	@make fclean -C visual
+	@/bin/rm -f visual_infos
 	@/bin/rm -f $(NAME)
 
 re: fclean all
