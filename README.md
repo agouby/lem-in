@@ -1,5 +1,7 @@
 # lem-in
 
+42 project - Algorithmy branch
+
 In this project, you have to travel ants through rooms from start to end.
 Only one ant per room is allowed, expect in start and end.
 
